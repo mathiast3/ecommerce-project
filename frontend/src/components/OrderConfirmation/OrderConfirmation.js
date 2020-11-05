@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-const AddProduct = () => {
+export const OrderConfirmation = () => {
   return <div></div>;
 };
 
@@ -8,4 +8,4 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderConfirmation);
