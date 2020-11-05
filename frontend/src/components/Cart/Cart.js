@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const Cart = () => {
-  return <div></div>;
+  return <div>cart</div>;
 };
 
 const mapStateToProps = (state) => ({});

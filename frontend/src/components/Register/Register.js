@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const Register = () => {
-  return <div></div>;
+  return <div>register</div>;
 };
 
 const mapStateToProps = (state) => ({});

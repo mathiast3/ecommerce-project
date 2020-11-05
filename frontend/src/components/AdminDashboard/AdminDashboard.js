@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const AdminDashboard = () => {
-  return <div></div>;
+  return <div>dashboard</div>;
 };
 
 const mapStateToProps = (state) => ({});

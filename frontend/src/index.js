@@ -6,12 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import store from "./store";
 import { Provider } from "react-redux";
+import createRoutes from "./routes";
 
+const routes = createRoutes();
+
+// <App />
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <React.StrictMode>{routes}</React.StrictMode>
   </Provider>,
 
   document.getElementById("root")

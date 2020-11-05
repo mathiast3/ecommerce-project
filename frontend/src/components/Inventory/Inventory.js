@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const Inventory = () => {
-  return <div></div>;
+  return <div>inventory</div>;
 };
 
 const mapStateToProps = (state) => ({});

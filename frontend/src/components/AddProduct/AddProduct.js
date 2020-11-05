@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 const AddProduct = () => {
-  return <div></div>;
+  return <div>add product</div>;
 };
 
 const mapStateToProps = (state) => ({});
