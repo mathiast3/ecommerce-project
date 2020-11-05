@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const OrderConfirmation = () => {
-  return <div></div>;
+  return <div>confirmation</div>;
 };
 
 const mapStateToProps = (state) => ({});

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const CustomerManager = () => {
-  return <div></div>;
+  return <div>customer manager</div>;
 };
 
 const mapStateToProps = (state) => ({});

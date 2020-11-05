@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const Home = () => {
-  return <div></div>;
+  return <div>home</div>;
 };
 
 const mapStateToProps = (state) => ({});

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 export const Billing = () => {
-  return <div></div>;
+  return <div>billing</div>;
 };
 
 const mapStateToProps = (state) => ({});
