@@ -54,7 +54,7 @@ const createRoutes = () => (
       />
 
       <Route
-        path="/inventory"
+        path="/products"
         render={(...props) => <App ChildComponent={Inventory} />}
       />
 

@@ -6,7 +6,9 @@ function App(props) {
   return (
     <div>
       <Nav />
-      <props.ChildComponent />
+      <div className="App">
+        <props.ChildComponent />
+      </div>
     </div>
   );
 }

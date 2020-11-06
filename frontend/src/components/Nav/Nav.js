@@ -28,7 +28,7 @@ export const NavComponent = () => {
         <Navbar.Brand>Furniture Hub</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/home">Home</Nav.Link>
-          <Nav.Link href="/inventory">Products</Nav.Link>
+          <Nav.Link href="/products">Products</Nav.Link>
         </Nav>
         <Nav>
           <Navbar.Text>Welcome, NAME </Navbar.Text>

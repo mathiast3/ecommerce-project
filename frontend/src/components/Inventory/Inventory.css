@@ -1,3 +1,13 @@
 th.sortable:focus {
   outline: none;
 }
+
+.imgContainer {
+  height: 50px;
+  width: 50px;
+  /* border: 1px solid blue; */
+}
+
+.imgProduct {
+  /* border: 1px solid red; */
+}
