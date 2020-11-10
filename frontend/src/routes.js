@@ -8,7 +8,7 @@ import CustomerManager from "./components/CustomerManager/CustomerManager";
 //import DetailPopUp from "./components/DetailPopUp/DetailPopUp" // not sure if this is needed - hold onto for now
 import Home from "./components/Home/Home";
 import Inventory from "./components/Inventory/Inventory";
-// import Login from "./components/Login/Login";
+import Login from "./components/Login/Login";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
 import Register from "./components/Register/Register";
@@ -23,7 +23,7 @@ const createRoutes = () => (
       <Route
         exact
         path="/"
-        render={(...props) => <App ChildComponent={Home} />}
+        render={(...props) => <App ChildComponent={Login} />}
       />
 
       <Route
