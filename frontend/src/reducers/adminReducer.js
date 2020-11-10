@@ -1,4 +1,4 @@
-import { GET_ALL_USERS } from "../actions/types";
+import { GET_ALL_USERS, GET_ALL_PRODUCTS } from "../actions/types";
 
 const initialState = {
   customers: [],
@@ -8,7 +8,20 @@ const initialState = {
 const adminReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_USERS:
-      return { ...state, customers: action.payload };
+      return {
+        ...state,
+        customers: action.payload,
+      };
+
+    case GET_ALL_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
+
+    // DELETE_USER_BY_ID, UPDATE_USER, ADD_USER?
+    // ADD_PRODUCT, UPDATE/DELETE PRODUCT BY ID?
+
     default:
       return state;
   }
