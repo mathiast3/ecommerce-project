@@ -54,4 +54,14 @@ public class UserController {
         }
     }
 
+    @PutMapping("/update/car")
+    public User updateCar(@RequestBody User user) {
+        if(!service.userRepository.existsById(user.getUserId())) {
+
+        }
+        User updated = service.userRepository.save(user);
+
+        return updated;
+    }
+
 }
