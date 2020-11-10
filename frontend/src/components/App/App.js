@@ -1,14 +1,14 @@
 import "./App.css";
 import Nav from "../Nav/Nav";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import { getAllUsers } from "../../api/getAllUsers";
 import { connect } from "react-redux";
 
 // rfcredux
 function App(props) {
-  useEffect(() => {
-    props.getAllUsers();
-  });
+  // useEffect(() => {
+  //   props.getAllUsers();
+  // });
 
   return (
     <div>
