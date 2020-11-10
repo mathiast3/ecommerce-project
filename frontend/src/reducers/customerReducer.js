@@ -1,7 +1,6 @@
-import { GET_ALL_USERS } from "../actions/types";
+import { GET_USER_BY_ID } from "../actions/types";
 
 const initialState = {
-  list: [],
   userId: -1,
   firstName: "",
   lastName: "",
@@ -12,8 +11,15 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_USERS:
-      return { ...state, list: action.payload };
+    case GET_USER_BY_ID:
+      const payload = action.payload;
+      return {
+        ...state,
+        userId: payload.id,
+        firstName: payload.name,
+        email: payload.email,
+        isAdmin: true,
+      };
     default:
       return state;
   }
