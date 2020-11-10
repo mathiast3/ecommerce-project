@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { useEffect } from "react";
 import getAllUsers from "../../api/getAllUsers";
 import getUserById from "../../api/getUserById";
+import deleteUserById from "../../api/deleteUserById";
 import { connect } from "react-redux";
 
 // rfcredux
@@ -10,6 +11,8 @@ function App(props) {
   useEffect(() => {
     props.getAllUsers();
     props.getUserById(1);
+    props.deleteUserById(1);
+    props.getAllUsers();
   });
 
   return (
@@ -27,6 +30,6 @@ function App(props) {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = { getAllUsers, getUserById };
+const mapDispatchToProps = { getAllUsers, getUserById, deleteUserById };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
