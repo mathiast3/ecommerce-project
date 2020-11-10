@@ -8,7 +8,7 @@ import CustomerManager from "./components/CustomerManager/CustomerManager";
 //import DetailPopUp from "./components/DetailPopUp/DetailPopUp" // not sure if this is needed - hold onto for now
 import Home from "./components/Home/Home";
 import Inventory from "./components/Inventory/Inventory";
-import Login from "./components/Login/Login";
+// import Login from "./components/Login/Login";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
 import Register from "./components/Register/Register";
@@ -16,13 +16,14 @@ import Register from "./components/Register/Register";
 /**
  * example: localhost:3000/home will render and display the Home component
  */
+
 const createRoutes = () => (
   <BrowserRouter>
     <Switch>
       <Route
         exact
         path="/"
-        render={(...props) => <App ChildComponent={Login} />}
+        render={(...props) => <App ChildComponent={Home} />}
       />
 
       <Route

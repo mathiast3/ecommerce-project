@@ -1,12 +1,26 @@
 import { connect } from "react-redux";
+import { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button } from "react-bootstrap";
 import "./Inventory.css";
 import exampleImage from "../../logo.svg";
+import ModalPopup from "../Modal/Modal";
 
 export const Inventory = () => {
   // temp var
   let isAdmin = true;
+  const [show, setShow] = useState(false);
+
+  const renderAddProduct = () => {
+    return (
+      <>
+        <Button size="sm" onClick={() => setShow(true)}>
+          Add Product
+        </Button>
+        <ModalPopup show={show} setShow={setShow} />{" "}
+      </>
+    );
+  };
 
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
@@ -137,7 +151,7 @@ export const Inventory = () => {
       <h1>Product Inventory</h1>
       {renderTable()}
 
-      {isAdmin ? <Button href="/addproduct">Add Product</Button> : null}
+      {isAdmin ? renderAddProduct() : null}
     </div>
   );
 };

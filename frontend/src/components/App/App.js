@@ -15,6 +15,9 @@ function App(props) {
       <Nav />
       <div className="App">
         <props.ChildComponent />
+        <footer className="fixed-bottom p-4 bg-dark text-white">
+          &copy; 2020 Company Inc .Privacy .Terms
+        </footer>
       </div>
     </div>
   );
