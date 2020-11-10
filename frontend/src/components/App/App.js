@@ -1,14 +1,16 @@
 import "./App.css";
 import Nav from "../Nav/Nav";
-//import { useEffect } from "react";
-import { getAllUsers } from "../../api/getAllUsers";
+import { useEffect } from "react";
+import getAllUsers from "../../api/getAllUsers";
+import getUserById from "../../api/getUserById";
 import { connect } from "react-redux";
 
 // rfcredux
 function App(props) {
-  // useEffect(() => {
-  //   props.getAllUsers();
-  // });
+  useEffect(() => {
+    props.getAllUsers();
+    props.getUserById(1);
+  });
 
   return (
     <div>
@@ -25,6 +27,6 @@ function App(props) {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = { getAllUsers };
+const mapDispatchToProps = { getAllUsers, getUserById };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
