@@ -1,28 +1,31 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Layout from '../shared/Layout';
 
 export const AdminDashboard = () => {
-  // temp var
-  let name = "jane";
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <br />
+    <Layout>
+      <section className="m-5">
+        <div>
+          <h1>Administrator Page</h1>
+          <p>This is the administrator's page</p>
+        </div>
 
-      <h2>
-        Welcome: {name} | <a href="/"> Logout</a>
-      </h2>
-      <br />
-
-      <h3>
-        <a href="/products">Product Inventory</a>
-      </h3>
-      <p>Here you can view, check and modify the product inventory</p>
-
-      <h3>
-        <a href="/customers">Customer Management</a>
-      </h3>
-      <p>Here you can view the customer information</p>
-    </div>
+        <div>
+          <h2>
+            Welcome: Jane | <Link to="/login">Logout</Link>
+          </h2>
+          <div>
+            <Link to="/admin/products">Product Inventory</Link>
+            <p>Here you can view, check and modify inventory</p>
+          </div>
+          <div>
+            <Link to="/admin/customers">Customer Management</Link>
+            <p>Here you can view the customer information</p>
+          </div>
+        </div>
+      </section>
+    </Layout>
   );
 };
 

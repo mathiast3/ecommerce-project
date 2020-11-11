@@ -1,12 +1,15 @@
-import { connect } from "react-redux";
-import { useState } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import { Button } from "react-bootstrap";
-import "./Inventory.css";
-import exampleImage from "../../logo.svg";
-import ModalPopup from "../Modal/Modal";
+import { connect } from 'react-redux';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { Button } from 'react-bootstrap';
+import './Inventory.css';
+import exampleImage from '../../logo.svg';
+import ModalPopup from '../Modal/Modal';
 
 export const Inventory = () => {
+  let history = useHistory();
+
   // temp var
   let isAdmin = true;
   const [show, setShow] = useState(false);
@@ -17,7 +20,7 @@ export const Inventory = () => {
         <Button size="sm" onClick={() => setShow(true)}>
           Add Product
         </Button>
-        <ModalPopup show={show} setShow={setShow} />{" "}
+        <ModalPopup show={show} setShow={setShow} />{' '}
       </>
     );
   };
@@ -40,7 +43,7 @@ export const Inventory = () => {
     else {
       return (
         <span>
-          &nbsp;&nbsp;<font color="black">{order === "asc" ? up : down}</font>
+          &nbsp;&nbsp;<font color="black">{order === 'asc' ? up : down}</font>
         </span>
       );
     }
@@ -73,43 +76,43 @@ export const Inventory = () => {
       {
         id: 0,
         image: exampleImage,
-        name: "item0",
-        price: "100",
+        name: 'item0',
+        price: '100',
       },
       {
         id: 1,
-        image: "",
-        name: "item1",
-        price: "111",
+        image: '',
+        name: 'item1',
+        price: '111',
       },
       {
         id: 2,
-        image: "",
-        name: "item3",
-        price: "222",
+        image: '',
+        name: 'item3',
+        price: '222',
       },
     ];
 
     const columns = [
       {
-        dataField: "id",
-        text: "Product ID",
+        dataField: 'id',
+        text: 'Product ID',
         sort: true,
       },
       {
-        dataField: "image",
-        text: "Image",
+        dataField: 'image',
+        text: 'Image',
         formatter: (row, cell) => imageFormatter(row, cell),
       },
       {
-        dataField: "name",
-        text: "Product Name",
+        dataField: 'name',
+        text: 'Product Name',
         sort: true,
         sortCaret: (order, column) => sortStyling(order, column),
       },
       {
-        dataField: "price",
-        text: "Product Price",
+        dataField: 'price',
+        text: 'Product Price',
         sort: true,
         sortCaret: (order, column) => sortStyling(order, column),
         formatter: (row, cell) => priceFormatter(row, cell),
@@ -119,18 +122,26 @@ export const Inventory = () => {
     // admin has additional functionality: update, delete
     const adminColumns = columns.concat([
       {
-        dataField: "",
-        text: "Options",
+        dataField: '',
+        text: 'Options',
         formatter: (row, cell) => optionsFormatter(row, cell),
       },
     ]);
 
     const defaultSorted = [
       {
-        dataField: "id",
-        order: "asc",
+        dataField: 'id',
+        order: 'asc',
       },
     ];
+    // const openProduct = (id) => {
+    //
+    // };
+    const rowEvents = {
+      onClick: (e, row) => {
+        history.push(`/admin/product/${row.id}`);
+      },
+    };
 
     return (
       <BootstrapTable
@@ -138,6 +149,7 @@ export const Inventory = () => {
         data={products}
         columns={isAdmin ? adminColumns : columns}
         defaultSorted={defaultSorted}
+        rowEvents={rowEvents}
         striped
         hover
         borderless

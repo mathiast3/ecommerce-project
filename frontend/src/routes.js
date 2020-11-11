@@ -1,18 +1,18 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AddProduct from "./components/AddProduct/AddProduct";
-import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
-import App from "./components/App/App";
-import Billing from "./components/Billing/Billing";
-import Cart from "./components/Cart/Cart";
-import CustomerManager from "./components/CustomerManager/CustomerManager";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AddProduct from './components/AddProduct/AddProduct';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import App from './components/App/App';
+import Billing from './components/Billing/Billing';
+import Cart from './components/Cart/Cart';
+import CustomerManager from './components/CustomerManager/CustomerManager';
 //import DetailPopUp from "./components/DetailPopUp/DetailPopUp" // not sure if this is needed - hold onto for now
-import Home from "./components/Home/Home";
-import Inventory from "./components/Inventory/Inventory";
-import Login from "./components/Login/Login";
-import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
-import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
-import Register from "./components/Register/Register";
-
+import Home from './components/Home/Home';
+import Inventory from './components/Inventory/Inventory';
+// import Login from "./components/Login/Login";
+import OrderConfirmation from './components/OrderConfirmation/OrderConfirmation';
+import OrderSuccess from './components/OrderSuccess/OrderSuccess';
+import Product from './components/Products/Product';
+import Register from './components/Register/Register';
 /**
  * example: localhost:3000/home will render and display the Home component
  */
@@ -23,7 +23,7 @@ const createRoutes = () => (
       <Route
         exact
         path="/"
-        render={(...props) => <App ChildComponent={Login} />}
+        render={(...props) => <App ChildComponent={Home} />}
       />
 
       <Route
@@ -47,6 +47,14 @@ const createRoutes = () => (
       <Route
         path="/customers"
         render={(...props) => <App ChildComponent={CustomerManager} />}
+      />
+
+      <Route
+        exact
+        path="/admin/product/:id"
+        render={(...props) => (
+          <App ChildComponent={Product} />
+        )}
       />
 
       <Route
