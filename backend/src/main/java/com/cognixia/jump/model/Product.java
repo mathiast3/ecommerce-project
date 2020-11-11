@@ -6,10 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "products")
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +18,7 @@ public class Product implements Serializable {
 
 	private String productName;
 	private String productCategory;
-	private String condition;
+	private String productCondition;
 	private String imageUrl;
 	private double price;
 
@@ -28,11 +26,11 @@ public class Product implements Serializable {
 		this("N/A", "N/A", "N/A", "N/A", -1);
 	}
 
-	public Product(String productName, String productCategory, String condition, String imageUrl, double price) {
-		super();
+	public Product(String productName, String productCategory, String productCondition, String imageUrl, double price) {
+
 		this.productName = productName;
 		this.productCategory = productCategory;
-		this.condition = condition;
+		this.productCondition = productCondition;
 		this.imageUrl = imageUrl;
 		this.price = price;
 	}
@@ -53,12 +51,12 @@ public class Product implements Serializable {
 		this.productCategory = productCategory;
 	}
 
-	public String getCondition() {
-		return condition;
+	public String getProductCondition() {
+		return productCondition;
 	}
 
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void setProductCondition(String condition) {
+		this.productCondition = condition;
 	}
 
 	public String getImageUrl() {
