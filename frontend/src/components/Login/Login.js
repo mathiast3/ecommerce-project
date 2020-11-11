@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Form, Button, Container, Spinner, Alert } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useHistory, Link } from 'react-router-dom';
-import { showError } from '../utils/errors';
+import { showError } from '../../utils/errors';
 import { CenterContent } from '../shared/styles/Auth';
 
 // Props will be sent from action creaors, map state to props via redux stroe
