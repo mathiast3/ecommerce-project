@@ -53,9 +53,7 @@ const createRoutes = () => (
       <Route
         exact
         path="/admin/product/:id"
-        render={(...props) => (
-          <App ChildComponent={Product} />
-        )}
+        render={(...props) => <App ChildComponent={Product} />}
       />
 
       <Route
