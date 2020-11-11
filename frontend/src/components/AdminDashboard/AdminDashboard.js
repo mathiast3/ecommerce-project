@@ -4,9 +4,11 @@ import { Link, withRouter } from "react-router-dom";
 export const AdminDashboard = (props) => {
   const { name } = props;
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <br />
+    
+        <div>
+          <h1>Administrator Page</h1>
+    
+        <br />
 
       <h2>
         Welcome: {name} | <Link to="/"> Logout</Link>

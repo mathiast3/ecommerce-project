@@ -22,7 +22,7 @@ function App(props) {
     else return null;
   };
   return (
-    <div>
+    <div style={{ marginBottom: '70px' }}>
       <Nav />
       {renderView()}
 
