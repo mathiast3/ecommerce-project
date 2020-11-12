@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Layout from '../shared/Layout';
+
 
 export const AdminDashboard = () => {
   return (
-    <Layout>
+    <>
       <section className="m-5">
         <div>
           <h1>Administrator Page</h1>
@@ -25,7 +25,7 @@ export const AdminDashboard = () => {
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 };
 
