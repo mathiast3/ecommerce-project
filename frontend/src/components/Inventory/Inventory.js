@@ -10,7 +10,9 @@ export const Inventory = () => {
   // temp var
   let isAdmin = true;
   const [show, setShow] = useState(false);
+  const [allProducts, setAllProducts] = useState({});
 
+  // to do: on submit, sends to backend
   const renderAddProduct = () => {
     return (
       <>

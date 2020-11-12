@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import getAllUsers from "../../api/getAllUsers";
 import getUserById from "../../api/getUserById";
 import deleteUserById from "../../api/deleteUserById";
+import getAllProducts from "../../api/getAllProducts";
 import { connect } from "react-redux";
 
 // rfcredux
@@ -13,6 +14,7 @@ function App(props) {
     // props.getUserById(1);
     // props.deleteUserById(1);
     // props.getAllUsers();
+    props.getAllProducts();
   });
 
   return (
@@ -30,6 +32,11 @@ function App(props) {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = { getAllUsers, getUserById, deleteUserById };
+const mapDispatchToProps = {
+  getAllUsers,
+  getUserById,
+  deleteUserById,
+  getAllProducts,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
