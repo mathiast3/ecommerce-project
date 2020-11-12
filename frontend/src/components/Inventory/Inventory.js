@@ -3,14 +3,13 @@ import { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button } from "react-bootstrap";
 import "./Inventory.css";
-import exampleImage from "../../logo.svg";
 import ModalPopup from "../Modal/Modal";
 
-export const Inventory = () => {
-  // temp var
-  let isAdmin = true;
+export const Inventory = (props) => {
+  const { isAdmin } = props;
   const [show, setShow] = useState(false);
 
+  // to do: on submit, sends to backend
   const renderAddProduct = () => {
     return (
       <>
@@ -21,6 +20,11 @@ export const Inventory = () => {
       </>
     );
   };
+
+  // maybe trigger a modal?
+  const handleClickEdit = () => {};
+
+  const handleClickDelete = () => {};
 
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
@@ -58,52 +62,43 @@ export const Inventory = () => {
     );
   };
 
-  // go to addproduct page? or an edit product page?
-  // delete call delete()
   const optionsFormatter = (cell, row) => {
     return (
       <span>
-        <Button sm>Edit</Button> <Button sm>Delete</Button>
+        <Button sm="true" onClick={handleClickEdit}>
+          Edit
+        </Button>{" "}
+        <Button sm="true" onClick={handleClickDelete}>
+          Delete
+        </Button>
       </span>
     );
   };
 
   const renderTable = () => {
-    const products = [
-      {
-        id: 0,
-        image: exampleImage,
-        name: "item0",
-        price: "100",
-      },
-      {
-        id: 1,
-        image: "",
-        name: "item1",
-        price: "111",
-      },
-      {
-        id: 2,
-        image: "",
-        name: "item3",
-        price: "222",
-      },
-    ];
+    const products = props.allProducts;
 
     const columns = [
       {
-        dataField: "id",
-        text: "Product ID",
+        dataField: "productName",
+        text: "Product Name",
         sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
       },
       {
-        dataField: "image",
+        dataField: "imageUrl",
         text: "Image",
         formatter: (row, cell) => imageFormatter(row, cell),
       },
       {
-        dataField: "name",
-        text: "Product Name",
+        dataField: "productCategory",
+        text: "Product Category",
+        sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
+      },
+      {
+        dataField: "productCondition",
+        text: "Product Condition",
         sort: true,
         sortCaret: (order, column) => sortStyling(order, column),
       },
@@ -150,13 +145,18 @@ export const Inventory = () => {
     <div>
       <h1>Product Inventory</h1>
       {renderTable()}
-
       {isAdmin ? renderAddProduct() : null}
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  const { admin, user } = state;
+  return {
+    allProducts: admin.products,
+    isAdmin: user.isAdmin,
+  };
+};
 
 const mapDispatchToProps = {};
 

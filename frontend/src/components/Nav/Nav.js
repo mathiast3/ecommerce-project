@@ -1,38 +1,68 @@
 import { connect } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
-export const NavComponent = () => {
-  // temp var
-  let loggedIn = false;
-  let isAdmin = true;
+export const NavComponent = (props) => {
+  const { isAdmin, loggedIn, name, dataLoaded } = props;
 
   // add more functionality here
   const renderLogInOut = () => {
-    let path = "/";
-    let label = loggedIn ? "Login" : "Log Out";
+    let label = loggedIn ? "Log Out" : "Log In";
 
-    return <Nav.Link href={path}>{label} </Nav.Link>;
+    return (
+      <Nav.Link href="" onClick={handleLogInOut}>
+        {label}{" "}
+      </Nav.Link>
+    );
+  };
+
+  const handleLogInOut = () => {
+    props.history.push("/");
   };
 
   const renderAdmin = () => {
     if (!isAdmin) {
       return null;
     }
-    return <Nav.Link href="/dashboard">Admin</Nav.Link>;
+    return (
+      <Nav.Link href="" onClick={handleAdmin}>
+        Admin
+      </Nav.Link>
+    );
   };
 
-  // products about contact welcome,___ logout cart |admin
+  const handleAdmin = () => {
+    props.history.push("/dashboard");
+  };
+
+  const handleHome = () => {
+    props.history.push("/home");
+  };
+
+  const handleProducts = () => {
+    props.history.push("/products");
+  };
+
+  const handleCart = () => {
+    props.history.push("/cart");
+  };
   return (
     <>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>Furniture Hub</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="/home">Home</Nav.Link>
-          <Nav.Link href="/products">Products</Nav.Link>
+          <Nav.Link href="" onClick={handleHome}>
+            Home
+          </Nav.Link>
+          <Nav.Link href="" onClick={handleProducts}>
+            Products
+          </Nav.Link>
         </Nav>
         <Nav>
-          <Navbar.Text>Welcome, NAME </Navbar.Text>
-          <Nav.Link href="/cart">Cart</Nav.Link>
+          <Navbar.Text>Welcome, {dataLoaded ? name : "Guest"} </Navbar.Text>
+          <Nav.Link href="" onClick={handleCart}>
+            Cart
+          </Nav.Link>
           {renderLogInOut()}
           {renderAdmin()}
         </Nav>
@@ -41,8 +71,19 @@ export const NavComponent = () => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  const { admin, user } = state;
+  return {
+    isAdmin: user.isAdmin,
+    loggedIn: admin.loggedIn,
+    name: user.firstName,
+    dataLoaded: admin.dataLoaded,
+  };
+};
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(NavComponent));

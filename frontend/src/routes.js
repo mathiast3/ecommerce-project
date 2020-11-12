@@ -11,7 +11,7 @@ import Inventory from "./components/Inventory/Inventory";
 // import Login from "./components/Login/Login";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 import OrderSuccess from "./components/OrderSuccess/OrderSuccess";
-import Register from "./components/Register/Register";
+// import Register from "./components/Register/Register";
 
 /**
  * example: localhost:3000/home will render and display the Home component
@@ -69,10 +69,10 @@ const createRoutes = () => (
         render={(...props) => <App ChildComponent={OrderSuccess} />}
       />
 
-      <Route
+      {/* <Route
         path="/register"
         render={(...props) => <App ChildComponent={Register} />}
-      />
+      /> */}
     </Switch>
   </BrowserRouter>
 );

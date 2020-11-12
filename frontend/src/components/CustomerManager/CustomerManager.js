@@ -1,23 +1,99 @@
 import { connect } from "react-redux";
 import { Form, FormControl, Button, Table } from "react-bootstrap";
+import BootstrapTable from "react-bootstrap-table-next";
 
-export const CustomerManager = () => {
-  const customers = [
-    {
-      name: "Rahul",
-      email: "rahul@email.com",
-      phone: "12345678",
-      username: "rahul",
-      enabled: true,
-    },
-    {
-      name: "Kumar",
-      email: "kumar@email.com",
-      phone: "12345678",
-      username: "rahul",
-      enabled: false,
-    },
-  ];
+export const CustomerManager = (props) => {
+  // renders up and down arrows indicating sort direction
+  const sortStyling = (order, column) => {
+    let up = String.fromCharCode(9652);
+    let down = String.fromCharCode(9662);
+
+    if (!order)
+      return (
+        <span>
+          &nbsp;&nbsp;
+          <font color="lightgrey">
+            {down}
+            {up}
+          </font>
+        </span>
+      );
+    else {
+      return (
+        <span>
+          &nbsp;&nbsp;<font color="black">{order === "asc" ? up : down}</font>
+        </span>
+      );
+    }
+  };
+
+  // go to addproduct page? or an edit product page?
+  // delete call delete()
+  const optionsFormatter = (cell, row) => {
+    return (
+      <span>
+        <Button sm="true">Edit</Button> <Button sm="true">Delete</Button>
+      </span>
+    );
+  };
+
+  const renderTable = () => {
+    const products = props.allCustomers;
+    const columns = [
+      {
+        dataField: "userId",
+        text: "ID",
+        sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
+      },
+      {
+        dataField: "firstName",
+        text: "First Name",
+        sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
+      },
+      {
+        dataField: "lastName",
+        text: "Last Name",
+        sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
+      },
+      {
+        dataField: "email",
+        text: "Email",
+        sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
+      },
+      {
+        dataField: "role",
+        text: "Role",
+        sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
+      },
+    ];
+
+    // admin has additional functionality: update, delete
+    const adminColumns = columns.concat([
+      {
+        dataField: "",
+        text: "Options",
+        formatter: (row, cell) => optionsFormatter(row, cell),
+      },
+    ]);
+
+    return (
+      <BootstrapTable
+        keyField="id"
+        data={products}
+        columns={adminColumns}
+        striped
+        hover
+        borderless
+        condensed
+      />
+    );
+  };
+
   return (
     <section className="m-5">
       <div>
@@ -30,34 +106,18 @@ export const CustomerManager = () => {
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-dark">Search</Button>
         </Form>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Username</th>
-              <th>Enabled</th>
-            </tr>
-          </thead>
-          <tbody>
-            {customers.map((customer) => (
-              <tr>
-                <td>{customer.name}</td>
-                <td>{customer.email}</td>
-                <td>{customer.phone}</td>
-                <td>{customer.username}</td>
-                <td>{customer.enabled}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        {renderTable()}
       </div>
     </section>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  const { admin } = state;
+  return {
+    allCustomers: admin.customers,
+  };
+};
 
 const mapDispatchToProps = {};
 

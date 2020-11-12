@@ -1,30 +1,25 @@
 import {
   ADD_TO_CART,
   FETCH_ERROR,
-  FETCH_START,
-  FETCH_SUCCESS,
-  LOAD_DATA,
   GET_ALL_USERS,
+  GET_USER_BY_ID,
+  ADD_USER,
+  UPDATE_USER,
+  DELETE_USER_BY_ID,
+  ADD_PRODUCT,
+  UPDATE_PRODUCT_BY_ID,
+  DELETE_PRODUCT_BY_ID,
+  DELETE_FROM_CART,
+  ADD_TRANSACTION,
+  GET_PRODUCTS,
+  GET_PRODUCT,
+  SET_DATA_LOADED,
 } from "./types";
-//import { getAllUsers } from "../api/index";
-import getAllUsers from "../api/getAllUsers";
 
 export const addToCart = (product) => {
   return {
     type: ADD_TO_CART,
     payload: product,
-  };
-};
-
-export const fetchStart = () => {
-  return {
-    type: FETCH_START,
-  };
-};
-
-export const fetchSuccess = () => {
-  return {
-    type: FETCH_SUCCESS,
   };
 };
 
@@ -35,49 +30,95 @@ export const fetchError = (error) => {
   };
 };
 
-export const loadData = (type, data) => {
+export const getUsers = (data) => {
   return {
-    type: type,
+    type: GET_ALL_USERS,
     payload: data,
   };
 };
 
-/*
-export const fetchData = () => {
-  return async (dispatch) => {
-    dispatch(getAllUsers());
-
-    try {
-      const data = await fetchWhat();
-      dispatch(loadData(data));
-      dispatch(fetchSuccess());
-    } catch (error) {
-      dispatch(fetchError(error));
-    }
-  };
-};*/
-
-// export const axiosAllUsers = () => {
-//   console.log("pre return");
-//   return async (dispatch) => {
-//     console.log("pre try");
-//     try {
-//       console.log("in try");
-//       const data = await getAllUsers();
-//       console.log("after await");
-//       dispatch(loadData(GET_ALL_USERS, data));
-//       dispatch(fetchSuccess());
-//     } catch (error) {
-//       console.log("error?");
-//       dispatch(fetchError(error));
-//     }
-//   };
-// };
-
-export const acAllUsers = (data) => {
-  console.log(data);
+export const getUser = (data) => {
   return {
-    type: GET_ALL_USERS,
+    type: GET_USER_BY_ID,
     payload: data,
+  };
+};
+
+// need to update redux store?
+export const deleteUser = () => {
+  return {
+    type: DELETE_USER_BY_ID,
+  };
+};
+
+export const addUser = (data) => {
+  //?
+  return {
+    type: ADD_USER,
+    payload: data,
+  };
+};
+
+export const updateUser = () => {
+  //?
+  return {
+    type: UPDATE_USER,
+  };
+};
+
+export const getProducts = (data) => {
+  return {
+    type: GET_PRODUCTS,
+    payload: data,
+  };
+};
+
+export const getProduct = (data) => {
+  return {
+    type: GET_PRODUCT,
+    payload: data,
+  };
+};
+
+export const addProduct = (data) => {
+  //?
+  return {
+    type: ADD_PRODUCT,
+    payload: data,
+  };
+};
+
+export const updateProduct = () => {
+  //?
+  return {
+    type: UPDATE_PRODUCT_BY_ID,
+  };
+};
+
+export const deleteProduct = () => {
+  //?
+  return {
+    type: DELETE_PRODUCT_BY_ID,
+  };
+};
+
+export const deleteFromCart = (index) => {
+  return {
+    type: DELETE_FROM_CART,
+    payload: index,
+  };
+};
+
+export const addTransaction = (data) => {
+  return {
+    type: ADD_TRANSACTION,
+    payload: data,
+  };
+};
+
+export const setDataLoaded = (flag) => {
+  return {
+    type: SET_DATA_LOADED,
+    payload: flag,
   };
 };

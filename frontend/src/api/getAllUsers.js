@@ -1,13 +1,14 @@
 import axios from "axios";
-import { acAllUsers } from "../actions/index";
+import { getUsers, fetchError } from "../actions/index";
+import { URI } from "../constants/index";
 
-export const getAllUsers = () => async (dispatch) => {
-  const GET_USER = "https://jsonplaceholder.typicode.com/users";
+const getAllUsers = () => async (dispatch) => {
+  const src = `${URI}/allUsers`;
   return await axios
-    .get(GET_USER)
+    .get(src)
     .then((response) => response.data)
-    .then((data) => dispatch(acAllUsers(data)))
-    .catch((error) => console.error(error));
+    .then((data) => dispatch(getUsers(data)))
+    .catch((error) => dispatch(fetchError(error)));
 };
 
 export default getAllUsers;
