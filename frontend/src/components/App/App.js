@@ -12,7 +12,7 @@ import { setDataLoaded } from "../../actions/index";
 function App(props) {
   useEffect(() => {
     props.getAllUsers();
-    props.getUserById(1);
+    // props.getUserById(1);
     props.getAllProducts();
     props.setDataLoaded(true);
   }, []);
