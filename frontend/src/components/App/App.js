@@ -9,10 +9,10 @@ import { connect } from "react-redux";
 // rfcredux
 function App(props) {
   useEffect(() => {
-    props.getAllUsers();
-    props.getUserById(1);
-    props.deleteUserById(1);
-    props.getAllUsers();
+    // props.getAllUsers();
+    // props.getUserById(1);
+    // props.deleteUserById(1);
+    // props.getAllUsers();
   });
 
   return (

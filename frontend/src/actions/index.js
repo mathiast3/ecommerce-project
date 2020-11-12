@@ -6,11 +6,13 @@ import {
   ADD_USER,
   UPDATE_USER,
   DELETE_USER_BY_ID,
-  GET_ALL_PRODUCTS,
   ADD_PRODUCT,
   UPDATE_PRODUCT_BY_ID,
   DELETE_PRODUCT_BY_ID,
   DELETE_FROM_CART,
+  ADD_TRANSACTION,
+  GET_PRODUCTS,
+  GET_PRODUCT,
 } from "./types";
 
 export const addToCart = (product) => {
@@ -48,10 +50,11 @@ export const deleteUser = () => {
   };
 };
 
-export const addUser = () => {
+export const addUser = (data) => {
   //?
   return {
     type: ADD_USER,
+    payload: data,
   };
 };
 
@@ -62,9 +65,16 @@ export const updateUser = () => {
   };
 };
 
-export const getAllProducts = (data) => {
+export const getProducts = (data) => {
   return {
-    type: GET_ALL_PRODUCTS,
+    type: GET_PRODUCTS,
+    payload: data,
+  };
+};
+
+export const getProduct = (data) => {
+  return {
+    type: GET_PRODUCT,
     payload: data,
   };
 };
@@ -95,5 +105,12 @@ export const deleteFromCart = (index) => {
   return {
     type: DELETE_FROM_CART,
     payload: index,
+  };
+};
+
+export const addTransaction = (data) => {
+  return {
+    type: ADD_TRANSACTION,
+    payload: data,
   };
 };

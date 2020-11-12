@@ -1,11 +1,11 @@
 import axios from "axios";
 import { deleteUser, fetchError } from "../actions/index";
+import { URI_DEL } from "../constants/index";
 
-// is this right?
 const deleteUserById = (id) => async (dispatch) => {
-  const src = `https://jsonplaceholder.typicode.com/users/${id}`;
+  const src = `${URI_DEL}/user/${id}`;
   return await axios
-    .delete(src)
+    .get(src)
     .then((response) => response.data)
     .then(() => dispatch(deleteUser()))
     .catch((error) => dispatch(fetchError(error)));

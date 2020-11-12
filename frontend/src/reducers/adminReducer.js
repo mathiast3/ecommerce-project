@@ -1,4 +1,4 @@
-import { GET_ALL_USERS, GET_ALL_PRODUCTS } from "../actions/types";
+import { GET_ALL_USERS, GET_PRODUCTS } from "../actions/types";
 
 const initialState = {
   customers: [],
@@ -13,7 +13,7 @@ const adminReducer = (state = initialState, action) => {
         customers: action.payload,
       };
 
-    case GET_ALL_PRODUCTS:
+    case GET_PRODUCTS:
       return {
         ...state,
         products: action.payload,

@@ -1,8 +1,9 @@
 import axios from "axios";
 import { getUser, fetchError } from "../actions/index";
+import { URI } from "../constants/index";
 
 const getUserById = (id) => async (dispatch) => {
-  const src = `https://jsonplaceholder.typicode.com/users/${id}`;
+  const src = `${URI}/user/${id}`;
   return await axios
     .get(src)
     .then((response) => response.data)
