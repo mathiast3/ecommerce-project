@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
-
+import "./Nav.css";
 export const NavComponent = (props) => {
   const { isAdmin, loggedIn, name, dataLoaded } = props;
 
@@ -47,7 +47,7 @@ export const NavComponent = (props) => {
     props.history.push("/cart");
   };
   return (
-    <>
+    <div className="header">
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>Furniture Hub</Navbar.Brand>
         <Nav className="mr-auto">
@@ -67,7 +67,7 @@ export const NavComponent = (props) => {
           {renderAdmin()}
         </Nav>
       </Navbar>
-    </>
+    </div>
   );
 };
 

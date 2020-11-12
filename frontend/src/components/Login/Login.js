@@ -1,22 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Form, Button, Container, Spinner, Alert } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import { useHistory, Link } from 'react-router-dom';
-import { showError } from '../../utils/errors';
-import { CenterContent } from '../shared/styles/Auth';
+import React from "react";
+import { connect } from "react-redux";
+import { Form, Button, Container, Spinner, Alert } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useHistory, Link } from "react-router-dom";
+import { showError } from "../../utils/errors";
+import { CenterContent } from "../shared/styles/Auth";
 
 // Props will be sent from action creaors, map state to props via redux stroe
 const Login = ({ loginUser, loading, user, error }) => {
   let history = useHistory();
   const initialValues = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   };
 
   const { register, handleSubmit, formState, errors, reset } = useForm({
     defaultValues: { ...initialValues },
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const onSubmit = (data) => {
@@ -25,7 +25,7 @@ const Login = ({ loginUser, loading, user, error }) => {
     // loginUser(data).then((res) => {
     //   if (res.status === 200) {
     reset(initialValues);
-    history.push('/');
+    history.push("/");
     //   }
     // });
   };
@@ -45,15 +45,15 @@ const Login = ({ loginUser, loading, user, error }) => {
               name="username"
               placeholder="Enter Username"
               ref={register({
-                required: 'Username is required',
+                required: "Username is required",
                 minLength: {
                   value: 2,
-                  message: 'Must be at least 2 chars long',
+                  message: "Must be at least 2 chars long",
                 },
               })}
             />
           </Form.Group>
-          {showError('username', errors)}
+          {showError("username", errors)}
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -62,15 +62,15 @@ const Login = ({ loginUser, loading, user, error }) => {
               name="password"
               placeholder="Password"
               ref={register({
-                required: 'Password is required',
+                required: "Password is required",
                 minLength: {
                   value: 7,
-                  message: 'Must be at least 7 chars long',
+                  message: "Must be at least 7 chars long",
                 },
               })}
             />
           </Form.Group>
-          {showError('password', errors)}
+          {showError("password", errors)}
 
           <Button
             block
@@ -81,7 +81,7 @@ const Login = ({ loginUser, loading, user, error }) => {
             {loading ? (
               <Spinner animation="border" variant="light" />
             ) : (
-              'Submit'
+              "Submit"
             )}
           </Button>
           <div className="account">

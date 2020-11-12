@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CenterContent = styled.div`
-  margin: 20px 0;
-  min-height: 100vh;
+  // margin: 20px 0;
+  // min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
