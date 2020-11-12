@@ -16,11 +16,11 @@ export const AdminDashboard = () => {
             Welcome: Jane | <Link to="/login">Logout</Link>
           </h2>
           <div>
-            <Link to="/admin/products">Product Inventory</Link>
+            <Link to="/products">Product Inventory</Link>
             <p>Here you can view, check and modify inventory</p>
           </div>
           <div>
-            <Link to="/admin/customers">Customer Management</Link>
+            <Link to="/customers">Customer Management</Link>
             <p>Here you can view the customer information</p>
           </div>
         </div>
