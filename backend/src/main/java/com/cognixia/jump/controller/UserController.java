@@ -55,4 +55,15 @@ public class UserController {
         }
     }
 
+    @PutMapping("/update/user")
+    public @ResponseBody String updateUser(@RequestBody User updateUser) {
+        Optional<User> found = service.userRespository.findById(updateUser.getUserId());
+        if(found.isPresent()) {
+            service.userRepository.save(updateUser);
+            return "Saved: " + updateUser.toString();
+        } else {
+            throw new ResourceNotFoundException("User with id = " + updateUser.getUserId() + " not found");
+        }
+    }
+
 }
