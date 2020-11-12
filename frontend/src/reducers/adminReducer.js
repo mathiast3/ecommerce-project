@@ -5,6 +5,17 @@ const initialState = {
   products: [],
 };
 
+/*
+  products: [
+    {
+        "productName": "",
+        "productCategory": "",
+        "productCondition": "",
+        imageUrl": "",
+        "price": 1.23
+    }
+  ]
+*/
 const adminReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_USERS:

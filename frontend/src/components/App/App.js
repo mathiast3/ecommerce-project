@@ -13,7 +13,7 @@ function App(props) {
     // props.getAllUsers();
     // props.getUserById(1);
     // props.deleteUserById(1);
-    // props.getAllUsers();
+    props.getAllUsers();
     props.getAllProducts();
   });
 

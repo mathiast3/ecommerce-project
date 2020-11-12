@@ -6,10 +6,8 @@ const getAllProducts = () => async (dispatch) => {
   const src = `${URI}/products`;
   return await axios
     .get(src)
-    .then((response) => console.log(response))
-    //.then((response) => response.data)
-    //.then((data) => console.log(data))
-    //.then((data) => dispatch(getProducts(data)))
+    .then((response) => response.data)
+    .then((data) => dispatch(getProducts(data)))
     .catch((error) => dispatch(fetchError(error)));
 };
 

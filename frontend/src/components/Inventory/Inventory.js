@@ -3,14 +3,12 @@ import { useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button } from "react-bootstrap";
 import "./Inventory.css";
-import exampleImage from "../../logo.svg";
 import ModalPopup from "../Modal/Modal";
 
-export const Inventory = () => {
+export const Inventory = (props) => {
   // temp var
   let isAdmin = true;
   const [show, setShow] = useState(false);
-  const [allProducts, setAllProducts] = useState({});
 
   // to do: on submit, sends to backend
   const renderAddProduct = () => {
@@ -65,47 +63,35 @@ export const Inventory = () => {
   const optionsFormatter = (cell, row) => {
     return (
       <span>
-        <Button sm>Edit</Button> <Button sm>Delete</Button>
+        <Button sm="true">Edit</Button> <Button sm="true">Delete</Button>
       </span>
     );
   };
 
   const renderTable = () => {
-    const products = [
-      {
-        id: 0,
-        image: exampleImage,
-        name: "item0",
-        price: "100",
-      },
-      {
-        id: 1,
-        image: "",
-        name: "item1",
-        price: "111",
-      },
-      {
-        id: 2,
-        image: "",
-        name: "item3",
-        price: "222",
-      },
-    ];
+    const products = props.allProducts;
 
     const columns = [
       {
-        dataField: "id",
-        text: "Product ID",
+        dataField: "productName",
+        text: "Product Name",
         sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
       },
       {
-        dataField: "image",
+        dataField: "imageUrl",
         text: "Image",
         formatter: (row, cell) => imageFormatter(row, cell),
       },
       {
-        dataField: "name",
-        text: "Product Name",
+        dataField: "productCategory",
+        text: "Product Category",
+        sort: true,
+        sortCaret: (order, column) => sortStyling(order, column),
+      },
+      {
+        dataField: "productCondition",
+        text: "Product Condition",
         sort: true,
         sortCaret: (order, column) => sortStyling(order, column),
       },
@@ -158,7 +144,12 @@ export const Inventory = () => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  const { admin } = state;
+  return {
+    allProducts: admin.products,
+  };
+};
 
 const mapDispatchToProps = {};
 

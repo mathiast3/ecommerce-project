@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./reducers/cartReducer";
 import customerReducer from "./reducers/customerReducer";
 import adminReducer from "./reducers/adminReducer";
-import productReducer from "./reducers/productReducer";
+// import productReducer from "./reducers/productReducer";
 
 // if nesting reducers, call combineReducers
 
@@ -17,7 +17,7 @@ const store = configureStore({
     admin: adminReducer,
     cart: cartReducer,
     customer: customerReducer,
-    product: productReducer,
+    // product: productReducer,
   },
 });
 
