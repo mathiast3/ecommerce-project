@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 export const NavComponent = (props) => {
   const { isAdmin, loggedIn, name, dataLoaded } = props;
-  console.log(name);
+
   // add more functionality here
   const renderLogInOut = () => {
     let label = loggedIn ? "Log Out" : "Log In";
