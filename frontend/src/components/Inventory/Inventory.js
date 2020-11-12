@@ -6,8 +6,7 @@ import "./Inventory.css";
 import ModalPopup from "../Modal/Modal";
 
 export const Inventory = (props) => {
-  // temp var
-  let isAdmin = true;
+  const { isAdmin } = props;
   const [show, setShow] = useState(false);
 
   // to do: on submit, sends to backend
@@ -21,6 +20,11 @@ export const Inventory = (props) => {
       </>
     );
   };
+
+  // maybe trigger a modal?
+  const handleClickEdit = () => {};
+
+  const handleClickDelete = () => {};
 
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
@@ -58,12 +62,15 @@ export const Inventory = (props) => {
     );
   };
 
-  // go to addproduct page? or an edit product page?
-  // delete call delete()
   const optionsFormatter = (cell, row) => {
     return (
       <span>
-        <Button sm="true">Edit</Button> <Button sm="true">Delete</Button>
+        <Button sm="true" onClick={handleClickEdit}>
+          Edit
+        </Button>{" "}
+        <Button sm="true" onClick={handleClickDelete}>
+          Delete
+        </Button>
       </span>
     );
   };
@@ -138,16 +145,16 @@ export const Inventory = (props) => {
     <div>
       <h1>Product Inventory</h1>
       {renderTable()}
-
       {isAdmin ? renderAddProduct() : null}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state;
+  const { admin, user } = state;
   return {
     allProducts: admin.products,
+    isAdmin: user.isAdmin,
   };
 };
 

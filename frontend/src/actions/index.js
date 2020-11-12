@@ -13,6 +13,7 @@ import {
   ADD_TRANSACTION,
   GET_PRODUCTS,
   GET_PRODUCT,
+  SET_DATA_LOADED,
 } from "./types";
 
 export const addToCart = (product) => {
@@ -112,5 +113,12 @@ export const addTransaction = (data) => {
   return {
     type: ADD_TRANSACTION,
     payload: data,
+  };
+};
+
+export const setDataLoaded = (flag) => {
+  return {
+    type: SET_DATA_LOADED,
+    payload: flag,
   };
 };

@@ -13,7 +13,15 @@ export const ADD_PRODUCT = "ADD_PRODUCT";
 export const UPDATE_PRODUCT_BY_ID = "UPDATE_PRODUCT_BY_ID";
 export const DELETE_PRODUCT_BY_ID = "DELETE_PRODUCT_BY_ID";
 
+export const SET_DATA_LOADED = "SET_DATA_LOADED";
+
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 
 export const ADD_TRANSACTION = "ADD_TRANSACTION";
+
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+export const LOG_OUT = "LOG_OUT";
+
+export const SET_IS_ADMIN = "SET_IS_ADMIN";

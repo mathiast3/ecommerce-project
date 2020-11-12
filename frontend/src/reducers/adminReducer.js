@@ -1,8 +1,17 @@
-import { GET_ALL_USERS, GET_PRODUCTS } from "../actions/types";
+import {
+  GET_ALL_USERS,
+  GET_PRODUCTS,
+  LOGIN_SUCCESS,
+  LOG_OUT,
+  SET_DATA_LOADED,
+} from "../actions/types";
 
 const initialState = {
   customers: [],
   products: [],
+  loggedIn: true,
+  dataLoaded: false,
+  // isAdmin: true,
 };
 
 /*
@@ -28,6 +37,29 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+      };
+
+    case SET_DATA_LOADED:
+      return {
+        ...state,
+        dataLoaded: action.payload,
+      };
+    // case SET_IS_ADMIN:
+    //   return {
+    //     ...state,
+    //     isAdmin: action.payload,
+    //   };
+
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loggedIn: true,
+      };
+
+    case LOG_OUT:
+      return {
+        ...state,
+        loggedIn: false,
       };
 
     // DELETE_USER_BY_ID, UPDATE_USER, ADD_USER?

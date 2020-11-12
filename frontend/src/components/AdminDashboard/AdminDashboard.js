@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 
-export const AdminDashboard = () => {
-  // temp var
-  let name = "jane";
+export const AdminDashboard = (props) => {
+  const { name } = props;
   return (
     <div>
       <h1>Admin Dashboard</h1>
@@ -26,7 +25,12 @@ export const AdminDashboard = () => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  const { admin, user } = state;
+  return {
+    name: user.firstName,
+  };
+};
 
 const mapDispatchToProps = {};
 
