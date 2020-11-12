@@ -16,7 +16,7 @@ export const Inventory = (props) => {
         <Button size="sm" onClick={() => setShow(true)}>
           Add Product
         </Button>
-        <ModalPopup show={show} setShow={setShow} />{" "}
+        <ModalPopup show={show} setShow={setShow} />{' '}
       </>
     );
   };
@@ -44,7 +44,7 @@ export const Inventory = (props) => {
     else {
       return (
         <span>
-          &nbsp;&nbsp;<font color="black">{order === "asc" ? up : down}</font>
+          &nbsp;&nbsp;<font color="black">{order === 'asc' ? up : down}</font>
         </span>
       );
     }
@@ -103,8 +103,8 @@ export const Inventory = (props) => {
         sortCaret: (order, column) => sortStyling(order, column),
       },
       {
-        dataField: "price",
-        text: "Product Price",
+        dataField: 'price',
+        text: 'Product Price',
         sort: true,
         sortCaret: (order, column) => sortStyling(order, column),
         formatter: (row, cell) => priceFormatter(row, cell),
@@ -114,18 +114,26 @@ export const Inventory = (props) => {
     // admin has additional functionality: update, delete
     const adminColumns = columns.concat([
       {
-        dataField: "",
-        text: "Options",
+        dataField: '',
+        text: 'Options',
         formatter: (row, cell) => optionsFormatter(row, cell),
       },
     ]);
 
     const defaultSorted = [
       {
-        dataField: "id",
-        order: "asc",
+        dataField: 'id',
+        order: 'asc',
       },
     ];
+    // const openProduct = (id) => {
+    //
+    // };
+    const rowEvents = {
+      onClick: (e, row) => {
+       // history.push(`/admin/product/${row.id}`);
+      },
+    };
 
     return (
       <BootstrapTable
@@ -133,6 +141,7 @@ export const Inventory = (props) => {
         data={products}
         columns={isAdmin ? adminColumns : columns}
         defaultSorted={defaultSorted}
+        rowEvents={rowEvents}
         striped
         hover
         borderless
