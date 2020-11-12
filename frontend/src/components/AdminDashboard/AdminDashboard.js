@@ -9,7 +9,7 @@ export const AdminDashboard = (props) => {
       <br />
 
       <h2>
-        Welcome: {name} | <a href="/"> Logout</a>
+        Welcome: {name} | <Link to="/"> Logout</Link>
       </h2>
       <br />
 
@@ -27,7 +27,7 @@ export const AdminDashboard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { user } = state;
   return {
     name: user.firstName,
   };
