@@ -59,7 +59,9 @@ export const NavComponent = (props) => {
           </Nav.Link>
         </Nav>
         <Nav>
-          <Navbar.Text>Welcome, {dataLoaded ? name : "Guest"} </Navbar.Text>
+          <Navbar.Text>Welcome, {loggedIn ? name : "Guest"} </Navbar.Text>
+
+          {/* <Navbar.Text>Welcome, {dataLoaded ? name : "Guest"} </Navbar.Text> */}
           <Nav.Link href="" onClick={handleCart}>
             Cart
           </Nav.Link>

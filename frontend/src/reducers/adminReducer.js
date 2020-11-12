@@ -9,7 +9,7 @@ import {
 const initialState = {
   customers: [],
   products: [],
-  loggedIn: true,
+  loggedIn: false,
   dataLoaded: false,
   // isAdmin: true,
 };
@@ -26,23 +26,24 @@ const initialState = {
   ]
 */
 const adminReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case GET_ALL_USERS:
       return {
         ...state,
-        customers: action.payload,
+        customers: payload,
       };
 
     case GET_PRODUCTS:
       return {
         ...state,
-        products: action.payload,
+        products: payload,
       };
 
     case SET_DATA_LOADED:
       return {
         ...state,
-        dataLoaded: action.payload,
+        dataLoaded: payload,
       };
     // case SET_IS_ADMIN:
     //   return {
