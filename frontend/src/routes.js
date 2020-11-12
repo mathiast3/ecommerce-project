@@ -24,7 +24,7 @@ const createRoutes = () => (
       <Route
         exact
         path="/"
-        render={(...props) => <App ChildComponent={Home} />}
+        render={(...props) => <App ChildComponent={Login} />}
       />
 
       <Route
