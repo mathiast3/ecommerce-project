@@ -22,17 +22,16 @@ function App(props) {
     else return null;
   };
   return (
-    <div style={{ marginBottom: '70px' }}>
+    // <div style={{ marginBottom: '70px' }}>
+    <div className="con">
       <Nav />
       {renderView()}
 
       <div className="App">
         <props.ChildComponent />
         {/* {props.dataLoaded ? <props.ChildComponent /> : <Loading />} */}
-        <footer className="fixed-bottom p-4 bg-dark text-white">
-          &copy; 2020 Company Inc .Privacy .Terms
-        </footer>
       </div>
+      <footer>&copy; 2020 Company Inc .Privacy .Terms</footer>
     </div>
   );
 }
