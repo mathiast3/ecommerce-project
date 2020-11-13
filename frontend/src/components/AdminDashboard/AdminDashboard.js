@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { logoutUser } from "../../actions/login.js";
+import { logoutUser } from "../../actions/auth.js";
 
 export const AdminDashboard = (props) => {
   const { name } = props;

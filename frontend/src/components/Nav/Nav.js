@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import "./Nav.css";
-import { logoutUser } from "../../actions/login.js";
+import { logoutUser } from "../../actions/auth.js";
 export const NavComponent = (props) => {
   const { isAdmin, loggedIn, name, dataLoaded } = props;
 
@@ -19,8 +19,8 @@ export const NavComponent = (props) => {
   const handleLogInOut = () => {
     if (loggedIn) {
       props.logoutUser();
-      props.history.push("/");
     }
+    props.history.push("/");
   };
 
   const renderAdmin = () => {
