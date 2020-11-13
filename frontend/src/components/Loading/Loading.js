@@ -1,12 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { Spinner } from 'react-bootstrap';
+import { Loaders } from '../shared/styles/Loader';
 
-export const Loading = () => {
-  return <div>I am loading!</div>;
+const LoadingScreen = () => {
+  return (
+    <Loaders>
+      <h1>Furniture Store</h1>
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </Loaders>
+  );
 };
-export default Loading;
-// const mapStateToProps = (state) => ({});
 
-// const mapDispatchToProps = {};
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Loading);
+export default LoadingScreen;
