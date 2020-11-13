@@ -1,13 +1,22 @@
-export const FETCH_ERROR = "FETCH_ERROR";
+export const FETCH_PRODUCTS_ERROR = "FETCH_PRODUCTS_ERROR";
+export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
+
+export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCH_USER_ERROR = "FETCH_USER_ERROR";
+
+export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+export const FETCH_USERS_ERROR = "FETCH_USERS_ERROR";
 
 // API calls
+export const SET_USERS = "SET_USERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const ADD_USER = "ADD_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER_BY_ID = "DELETE_USER_BY_ID";
 
-export const GET_PRODUCTS = "GET_PRODUCTS";
+export const SET_PRODUCTS = "SET_PRODUCTS";
+// export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT = "GET_PRODUCT";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const UPDATE_PRODUCT_BY_ID = "UPDATE_PRODUCT_BY_ID";

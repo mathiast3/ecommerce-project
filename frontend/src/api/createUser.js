@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUser, fetchError } from "../actions/index";
+import { addUser, fetchError } from "../actions/user";
 import { URI_ADD } from "../constants/index";
 
 export const createUser = (data) => async (dispatch) => {
@@ -7,7 +7,9 @@ export const createUser = (data) => async (dispatch) => {
   return await axios
     .post(src, data)
     .then((response) => response.data)
-    .then((data) => dispatch(addUser(data)))
+    .then((data) => {
+      dispatch(addUser(data));
+    })
     .catch((error) => dispatch(fetchError(error)));
 };
 

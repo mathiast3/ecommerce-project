@@ -1,6 +1,6 @@
 import {
   ADD_TO_CART,
-  FETCH_ERROR,
+  FETCH_PRODUCTS_ERROR,
   GET_ALL_USERS,
   GET_USER_BY_ID,
   ADD_USER,
@@ -11,9 +11,10 @@ import {
   DELETE_PRODUCT_BY_ID,
   DELETE_FROM_CART,
   ADD_TRANSACTION,
-  GET_PRODUCTS,
+  // GET_PRODUCTS,
   GET_PRODUCT,
   SET_DATA_LOADED,
+  FETCH_PRODUCTS_SUCCESS,
 } from "./types";
 
 export const addToCart = (product) => {
@@ -23,12 +24,18 @@ export const addToCart = (product) => {
   };
 };
 
-export const fetchError = (error) => {
-  return {
-    type: FETCH_ERROR,
-    payload: error,
-  };
-};
+// export const fetchError = (error) => {
+//   return {
+//     type: FETCH_PRODUCTS_ERROR,
+//     payload: error,
+//   };
+// };
+
+// export const fetchSuccess = () => {
+//   return {
+//     type: FETCH_PRODUCTS_SUCCESS,
+//   };
+// };
 
 export const getUsers = (data) => {
   return {
@@ -66,12 +73,12 @@ export const updateUser = () => {
   };
 };
 
-export const getProducts = (data) => {
-  return {
-    type: GET_PRODUCTS,
-    payload: data,
-  };
-};
+// export const getProducts = (data) => {
+//   return {
+//     type: GET_PRODUCTS,
+//     payload: data,
+//   };
+// };
 
 export const getProduct = (data) => {
   return {

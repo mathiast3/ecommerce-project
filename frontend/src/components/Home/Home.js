@@ -16,7 +16,7 @@ export const Home = () => {
     <Container>
       <Image
         style={{ backgroundSize: "cover", width: "100%" }}
-        responsive
+        responsive="true"
         src={sofa}
       />
       <h1 style={textStyle}>Get some rest time</h1>

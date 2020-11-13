@@ -294,9 +294,9 @@ export const Register = ({
 };
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { auth, user } = state;
   return {
-    loggedIn: admin.loggedIn,
+    loggedIn: auth.loggedIn,
   };
 };
 

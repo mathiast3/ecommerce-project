@@ -141,9 +141,9 @@ const Login = ({ history, loginUser, loading, error, loggedIn, isAdmin }) => {
 };
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { auth, user } = state;
   return {
-    loggedIn: admin.loggedIn,
+    loggedIn: auth.loggedIn,
     isAdmin: user.isAdmin,
   };
 };

@@ -1,17 +1,20 @@
 import axios from "axios";
-import { getUsers, fetchError } from "../actions/index";
+import { setUsers, fetchError, fetchSuccess } from "../actions/users";
 import { URI } from "../constants/index";
 
-export const getAllUsers = () => async (dispatch) => {
+export const setAllUsers = () => async (dispatch) => {
   const src = `${URI}/allUsers`;
   return await axios
     .get(src)
     .then((response) => response.data)
-    .then((data) => dispatch(getUsers(data)))
+    .then((data) => {
+      dispatch(setUsers(data));
+      dispatch(fetchSuccess());
+    })
     .catch((error) => dispatch(fetchError(error)));
 };
 
-export const getAllUsersWORedux = () => {
+export const getAllUsers = () => {
   const src = `${URI}/allUsers`;
   return axios
     .get(src)

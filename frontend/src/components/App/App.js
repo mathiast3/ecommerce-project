@@ -1,21 +1,16 @@
 import "./App.css";
 import Nav from "../Nav/Nav";
 import { useEffect } from "react";
-// import getAllUsers from "../../api/getAllUsers";
-// import getUserById from "../../api/getUserById";
-// import deleteUserById from "../../api/deleteUserById";
-// import getAllProducts from "../../api/getAllProducts";
 import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
 import { setDataLoaded } from "../../actions/index";
+import { getAllProducts } from "../../api/getAllProducts";
+
 // rfcredux
 function App(props) {
-  // useEffect(() => {
-  //   props.getAllUsers();
-  //   // props.getUserById(1);
-  //   props.getAllProducts();
-  //   props.setDataLoaded(true);
-  // }, []);
+  useEffect(() => {
+    props.getAllProducts();
+  }, []);
 
   const renderView = () => {
     if (!props.dataLoaded) return <Loading />;
@@ -37,20 +32,14 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { auth, user } = state;
   return {
-    customers: admin.customers,
-    products: admin.products,
-    userId: user.userId,
-    dataLoaded: admin.dataLoaded,
+    dataLoaded: auth.dataLoaded,
   };
 };
 
 const mapDispatchToProps = {
-  // getAllUsers,
-  // getUserById,
-  // deleteUserById,
-  // getAllProducts,
+  getAllProducts,
   setDataLoaded,
 };
 
