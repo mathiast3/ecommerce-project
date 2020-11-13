@@ -1,17 +1,25 @@
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import { logoutUser } from "../../actions/login.js";
 
 export const AdminDashboard = (props) => {
   const { name } = props;
+
+  const handleLogout = () => {
+    props.logoutUser();
+  };
   return (
-    
-        <div>
-          <h1>Administrator Page</h1>
-    
-        <br />
+    <div>
+      <h1>Administrator Page</h1>
+
+      <br />
 
       <h2>
-        Welcome: {name} | <Link to="/"> Logout</Link>
+        Welcome: {name} |{" "}
+        <Link to="/" onClick={handleLogout}>
+          {" "}
+          Logout
+        </Link>
       </h2>
       <br />
 
@@ -29,13 +37,14 @@ export const AdminDashboard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { user } = state;
+  const { user, admin } = state;
   return {
     name: user.firstName,
+    loggedIn: admin.loggedIn,
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { logoutUser };
 
 export default connect(
   mapStateToProps,

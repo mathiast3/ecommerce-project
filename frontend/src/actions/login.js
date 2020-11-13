@@ -25,10 +25,14 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
   }
 };
 
-export const logoutUser = () => async (dispatch) => {
-  dispatch({
+export const logoutUser = () => {
+  //async (dispatch) => {
+  return {
     type: LOG_OUT,
-  });
+  };
+  //dispatch({
+  //type: LOG_OUT,
+  //});
 };
 
 const setLoginSuccess = (data) => {

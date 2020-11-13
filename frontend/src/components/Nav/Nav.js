@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import "./Nav.css";
+import { logoutUser } from "../../actions/login.js";
 export const NavComponent = (props) => {
   const { isAdmin, loggedIn, name, dataLoaded } = props;
 
-  // add more functionality here
   const renderLogInOut = () => {
     let label = loggedIn ? "Log Out" : "Log In";
 
@@ -17,7 +17,10 @@ export const NavComponent = (props) => {
   };
 
   const handleLogInOut = () => {
-    props.history.push("/");
+    if (loggedIn) {
+      props.logoutUser();
+      props.history.push("/");
+    }
   };
 
   const renderAdmin = () => {
@@ -83,7 +86,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { logoutUser };
 
 export default connect(
   mapStateToProps,
