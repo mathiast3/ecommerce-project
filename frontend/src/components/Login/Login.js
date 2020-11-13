@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useHistory, withRouter, Link } from "react-router-dom";
 import { showError } from "../../utils/errors";
 import { CenterContent } from "../shared/styles/Auth";
-import { loginUser } from "../../actions/login";
+import { loginUser } from "../../actions/auth";
 // Props will be sent from action creaors, map state to props via redux stroe
 //user
 const Login = ({ history, loginUser, loading, error, loggedIn, isAdmin }) => {

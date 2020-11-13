@@ -4,6 +4,7 @@ import {
   LOGIN_SUCCESS,
   LOG_OUT,
   SET_DATA_LOADED,
+  REGISTER_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   products: [],
   loggedIn: false,
   dataLoaded: false,
+  registered: false,
   // isAdmin: true,
 };
 
@@ -50,6 +52,11 @@ const adminReducer = (state = initialState, action) => {
     //     ...state,
     //     isAdmin: action.payload,
     //   };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        registered: true,
+      };
 
     case LOGIN_SUCCESS:
       return {
@@ -61,6 +68,7 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedIn: false,
+        registered: false,
       };
 
     // DELETE_USER_BY_ID, UPDATE_USER, ADD_USER?

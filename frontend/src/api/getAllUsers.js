@@ -11,8 +11,6 @@ export const getAllUsers = () => async (dispatch) => {
     .catch((error) => dispatch(fetchError(error)));
 };
 
-export default getAllUsers;
-
 export const getAllUsersWORedux = () => {
   const src = `${URI}/allUsers`;
   return axios

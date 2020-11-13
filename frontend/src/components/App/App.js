@@ -1,21 +1,21 @@
 import "./App.css";
 import Nav from "../Nav/Nav";
 import { useEffect } from "react";
-import getAllUsers from "../../api/getAllUsers";
-import getUserById from "../../api/getUserById";
-import deleteUserById from "../../api/deleteUserById";
-import getAllProducts from "../../api/getAllProducts";
+// import getAllUsers from "../../api/getAllUsers";
+// import getUserById from "../../api/getUserById";
+// import deleteUserById from "../../api/deleteUserById";
+// import getAllProducts from "../../api/getAllProducts";
 import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
 import { setDataLoaded } from "../../actions/index";
 // rfcredux
 function App(props) {
-  useEffect(() => {
-    props.getAllUsers();
-    // props.getUserById(1);
-    props.getAllProducts();
-    props.setDataLoaded(true);
-  }, []);
+  // useEffect(() => {
+  //   props.getAllUsers();
+  //   // props.getUserById(1);
+  //   props.getAllProducts();
+  //   props.setDataLoaded(true);
+  // }, []);
 
   const renderView = () => {
     if (!props.dataLoaded) return <Loading />;
@@ -25,7 +25,7 @@ function App(props) {
     // <div style={{ marginBottom: '70px' }}>
     <div className="con">
       <Nav />
-      {renderView()}
+      {/* {renderView()} */}
 
       <div className="App">
         <props.ChildComponent />
@@ -47,10 +47,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  getAllUsers,
-  getUserById,
-  deleteUserById,
-  getAllProducts,
+  // getAllUsers,
+  // getUserById,
+  // deleteUserById,
+  // getAllProducts,
   setDataLoaded,
 };
 
