@@ -1,4 +1,9 @@
-import { GET_USER_BY_ID, SET_IS_ADMIN, LOGIN_SUCCESS } from "../actions/types";
+import {
+  GET_USER_BY_ID,
+  SET_IS_ADMIN,
+  LOGIN_SUCCESS,
+  LOG_OUT,
+} from "../actions/types";
 
 const initialState = {
   userId: -1,
@@ -41,6 +46,8 @@ const userReducer = (state = initialState, action) => {
         isAdmin: p.role === "ROLE_USER", // fix to !== later
       };
 
+    case LOG_OUT:
+      return initialState;
     default:
       return state;
   }
