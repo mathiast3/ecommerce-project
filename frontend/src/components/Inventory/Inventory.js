@@ -1,12 +1,70 @@
 import { connect } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button } from "react-bootstrap";
 import "./Inventory.css";
 import ModalPopup from "../Modal/Modal";
+import deleteProductById from "../../api/deleteProductById";
+import { fetchError, fetchSuccess } from "../../actions/product";
+import { setAllProducts, getAllProducts } from "../../api/getAllProducts";
 
-export const Inventory = ({ isAdmin, allProducts }) => {
+export const Inventory = ({
+  isAdmin,
+  allProducts,
+  fetchSuccess,
+  fetchError,
+  setAllProducts,
+  getAllProducts,
+}) => {
+  const [update, setUpdate] = useState(false);
   const [show, setShow] = useState(false);
+  const [itemDelete, setItemDelete] = useState(0);
+  const [itemEdit, setItemEdit] = useState(0);
+  const [prod, setProd] = useState([]);
+
+  // useEffect(() => {
+  //   setAllProducts()
+  //     .then((result) => setProd(result))
+  //     .catch((err) => console.log(err));
+  // }, []);
+
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    console.log(itemDelete, prod);
+    if (itemDelete !== 0) {
+      deleteProductById(itemDelete);
+
+      setUpdate(true);
+      // setAllProducts()
+      //   .then((result) => {
+      //     setProds(result);
+      //   })
+      //   .catch((err) => console.log(err));
+    }
+    setAllProducts()
+      .then((result) => setProd(result))
+      .catch((err) => console.log(err));
+  }, []);
+
+  // useEffect(() => {
+  //   if (update) {
+  //     setAllProducts()
+  //       .then((result) => setProd(result))
+  //       .catch((err) => console.log(err));
+  //     setUpdate(false);
+  //   }
+  // }, [update, allProducts]);
+  // }, []);
+
+  // useEffect(() => {
+  //   setAllProducts();
+  //   // .then((result) => {
+  //   //   setProds(result);
+  //   //   fetchSuccess();
+  //   // })
+  //   // .catch((err) => fetchError(err));
+  // }, []);
 
   // to do: on submit, sends to backend
   const renderAddProduct = () => {
@@ -21,9 +79,13 @@ export const Inventory = ({ isAdmin, allProducts }) => {
   };
 
   // maybe trigger a modal?
-  const handleClickEdit = () => {};
+  const handleClickEdit = (e) => {
+    setItemEdit(e.target.value);
+  };
 
-  const handleClickDelete = () => {};
+  const handleClickDelete = (e) => {
+    setItemDelete(e.target.value);
+  };
 
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
@@ -61,13 +123,14 @@ export const Inventory = ({ isAdmin, allProducts }) => {
     );
   };
 
+  // passed into row: {id: 1, productName: "", category ...}
   const optionsFormatter = (cell, row) => {
     return (
       <span>
-        <Button sm="true" onClick={handleClickEdit}>
+        <Button sm="true" value={row.id} onClick={handleClickEdit}>
           Edit
         </Button>{" "}
-        <Button sm="true" onClick={handleClickDelete}>
+        <Button sm="true" value={row.id} onClick={handleClickDelete}>
           Delete
         </Button>
       </span>
@@ -135,7 +198,7 @@ export const Inventory = ({ isAdmin, allProducts }) => {
     return (
       <BootstrapTable
         keyField="id"
-        data={allProducts}
+        data={prod}
         columns={isAdmin ? adminColumns : columns}
         defaultSorted={defaultSorted}
         rowEvents={rowEvents}
@@ -164,6 +227,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  fetchSuccess,
+  fetchError,
+  setAllProducts,
+  getAllProducts,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);
