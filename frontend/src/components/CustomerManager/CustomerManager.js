@@ -1,8 +1,21 @@
 import { connect } from "react-redux";
 import { Form, FormControl, Button, Table } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
+import { useState, useEffect } from "react";
+import { getAllUsers } from "../../api/getAllUsers";
+import { fetchError, fetchSuccess } from "../../actions/users";
 
-export const CustomerManager = (props) => {
+export const CustomerManager = ({ fetchError, fetchSuccess }) => {
+  const [customers, setCustomers] = useState([]);
+  useEffect(() => {
+    getAllUsers()
+      .then((result) => {
+        setCustomers(result);
+        fetchSuccess();
+      })
+      .catch((err) => fetchError(err));
+  }, []);
+
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
     let up = String.fromCharCode(9652);
@@ -38,7 +51,7 @@ export const CustomerManager = (props) => {
   };
 
   const renderTable = () => {
-    const products = props.allCustomers;
+    //const products = props.allCustomers;
     const columns = [
       {
         dataField: "userId",
@@ -84,7 +97,7 @@ export const CustomerManager = (props) => {
     return (
       <BootstrapTable
         keyField="id"
-        data={products}
+        data={customers}
         columns={adminColumns}
         striped
         hover
@@ -113,12 +126,12 @@ export const CustomerManager = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state;
+  const { auth } = state;
   return {
-    allCustomers: admin.customers,
+    //allCustomers: admin.customers,
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { fetchError, fetchSuccess };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerManager);

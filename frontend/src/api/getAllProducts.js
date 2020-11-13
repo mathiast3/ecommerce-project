@@ -1,14 +1,15 @@
 import axios from "axios";
-import { getProducts, fetchError } from "../actions/index";
 import { URI } from "../constants/index";
+import { setProducts, fetchError, fetchSuccess } from "../actions/products";
 
-const getAllProducts = () => async (dispatch) => {
+export const getAllProducts = () => async (dispatch) => {
   const src = `${URI}/products`;
   return await axios
     .get(src)
     .then((response) => response.data)
-    .then((data) => dispatch(getProducts(data)))
+    .then((data) => {
+      dispatch(setProducts(data));
+      dispatch(fetchSuccess());
+    })
     .catch((error) => dispatch(fetchError(error)));
 };
-
-export default getAllProducts;

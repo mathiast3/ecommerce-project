@@ -5,8 +5,7 @@ import { Button } from "react-bootstrap";
 import "./Inventory.css";
 import ModalPopup from "../Modal/Modal";
 
-export const Inventory = (props) => {
-  const { isAdmin } = props;
+export const Inventory = ({ isAdmin, allProducts }) => {
   const [show, setShow] = useState(false);
 
   // to do: on submit, sends to backend
@@ -16,7 +15,7 @@ export const Inventory = (props) => {
         <Button size="sm" onClick={() => setShow(true)}>
           Add Product
         </Button>
-        <ModalPopup show={show} setShow={setShow} />{' '}
+        <ModalPopup show={show} setShow={setShow} />{" "}
       </>
     );
   };
@@ -44,7 +43,7 @@ export const Inventory = (props) => {
     else {
       return (
         <span>
-          &nbsp;&nbsp;<font color="black">{order === 'asc' ? up : down}</font>
+          &nbsp;&nbsp;<font color="black">{order === "asc" ? up : down}</font>
         </span>
       );
     }
@@ -76,8 +75,6 @@ export const Inventory = (props) => {
   };
 
   const renderTable = () => {
-    const products = props.allProducts;
-
     const columns = [
       {
         dataField: "productName",
@@ -103,8 +100,8 @@ export const Inventory = (props) => {
         sortCaret: (order, column) => sortStyling(order, column),
       },
       {
-        dataField: 'price',
-        text: 'Product Price',
+        dataField: "price",
+        text: "Product Price",
         sort: true,
         sortCaret: (order, column) => sortStyling(order, column),
         formatter: (row, cell) => priceFormatter(row, cell),
@@ -114,16 +111,16 @@ export const Inventory = (props) => {
     // admin has additional functionality: update, delete
     const adminColumns = columns.concat([
       {
-        dataField: '',
-        text: 'Options',
+        dataField: "",
+        text: "Options",
         formatter: (row, cell) => optionsFormatter(row, cell),
       },
     ]);
 
     const defaultSorted = [
       {
-        dataField: 'id',
-        order: 'asc',
+        dataField: "id",
+        order: "asc",
       },
     ];
     // const openProduct = (id) => {
@@ -131,14 +128,14 @@ export const Inventory = (props) => {
     // };
     const rowEvents = {
       onClick: (e, row) => {
-       // history.push(`/admin/product/${row.id}`);
+        // history.push(`/admin/product/${row.id}`);
       },
     };
 
     return (
       <BootstrapTable
         keyField="id"
-        data={products}
+        data={allProducts}
         columns={isAdmin ? adminColumns : columns}
         defaultSorted={defaultSorted}
         rowEvents={rowEvents}
@@ -160,9 +157,9 @@ export const Inventory = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { user, products } = state;
   return {
-    allProducts: admin.products,
+    allProducts: products.allProducts,
     isAdmin: user.isAdmin,
   };
 };

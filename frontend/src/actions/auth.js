@@ -5,12 +5,12 @@ import {
   REGISTER_SUCCESS,
   REGISTER_ERROR,
 } from "./types";
-import { getAllUsersWORedux } from "../api/getAllUsers";
+import { getAllUsers } from "../api/getAllUsers";
 import { createUserWORedux } from "../api/createUser";
 
 export const loginUser = ({ email, password }) => async (dispatch) => {
   try {
-    let allUsers = await getAllUsersWORedux();
+    let allUsers = await getAllUsers();
     let found = false;
     let user;
 
@@ -25,10 +25,10 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
     }
 
     found
-      ? dispatch(setLoginSuccess(user))
-      : dispatch(setLoginError("User not found"));
+      ? dispatch(loginSuccess(user))
+      : dispatch(loginError("User not found"));
   } catch (err) {
-    dispatch(setLoginError(err));
+    dispatch(loginError(err));
   }
 };
 
@@ -49,13 +49,13 @@ export const registerUser = ({
       password,
     });
     if (newUser) {
-      dispatch(setRegisterSuccess());
-      dispatch(setLoginSuccess(newUser));
+      dispatch(registerSuccess());
+      dispatch(loginSuccess(newUser));
     } else {
-      dispatch(setRegisterError("Unable to register user"));
+      dispatch(registerError("Unable to register user"));
     }
   } catch (err) {
-    dispatch(setRegisterError(err));
+    dispatch(registerError(err));
   }
 };
 
@@ -65,27 +65,27 @@ export const logoutUser = () => {
   };
 };
 
-const setLoginSuccess = (data) => {
+const loginSuccess = (data) => {
   return {
     type: LOGIN_SUCCESS,
     payload: data,
   };
 };
 
-const setLoginError = (err) => {
+const loginError = (err) => {
   return {
     type: LOGIN_ERROR,
     payload: err,
   };
 };
 
-const setRegisterSuccess = () => {
+const registerSuccess = () => {
   return {
     type: REGISTER_SUCCESS,
   };
 };
 
-const setRegisterError = (err) => {
+const registerError = (err) => {
   return {
     type: REGISTER_ERROR,
     payload: err,

@@ -2,11 +2,9 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { logoutUser } from "../../actions/auth.js";
 
-export const AdminDashboard = (props) => {
-  const { name } = props;
-
+export const AdminDashboard = ({ name, logoutUser }) => {
   const handleLogout = () => {
-    props.logoutUser();
+    logoutUser();
   };
   return (
     <div>
@@ -37,10 +35,10 @@ export const AdminDashboard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { user, admin } = state;
+  const { user, auth } = state;
   return {
     name: user.firstName,
-    loggedIn: admin.loggedIn,
+    loggedIn: auth.loggedIn,
   };
 };
 

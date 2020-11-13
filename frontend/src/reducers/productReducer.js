@@ -1,28 +1,24 @@
-import { GET_PRODUCTS } from "../actions/types";
+import { SET_PRODUCTS, FETCH_PRODUCTS_ERROR } from "../actions/types";
 
 const initialState = {
-  all: [],
+  allProducts: [],
+  error: {},
 };
 
-/*
-    {
-        "productName": "",
-        "productCategory": "",
-        "productCondition": "",
-        imageUrl": "",
-        "price": 1.23
-    }
-*/
 const productReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_PRODUCTS:
+  const { type, payload } = action;
+  switch (type) {
+    case SET_PRODUCTS:
       return {
         ...state,
-        all: action.payload,
+        allProducts: payload,
       };
 
-    // DELETE_USER_BY_ID, UPDATE_USER, ADD_USER?
-    // ADD_PRODUCT, UPDATE/DELETE PRODUCT BY ID?
+    case FETCH_PRODUCTS_ERROR:
+      return {
+        ...state,
+        error: payload,
+      };
 
     default:
       return state;

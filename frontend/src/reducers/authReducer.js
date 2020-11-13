@@ -8,8 +8,6 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  customers: [],
-  products: [],
   loggedIn: false,
   dataLoaded: false,
   registered: false,
@@ -27,21 +25,9 @@ const initialState = {
     }
   ]
 */
-const adminReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case GET_ALL_USERS:
-      return {
-        ...state,
-        customers: payload,
-      };
-
-    case GET_PRODUCTS:
-      return {
-        ...state,
-        products: payload,
-      };
-
     case SET_DATA_LOADED:
       return {
         ...state,
@@ -62,6 +48,7 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedIn: true,
+        registered: true,
       };
 
     case LOG_OUT:
@@ -79,4 +66,4 @@ const adminReducer = (state = initialState, action) => {
   }
 };
 
-export default adminReducer;
+export default authReducer;

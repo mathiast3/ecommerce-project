@@ -3,9 +3,14 @@ import { Navbar, Nav } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import "./Nav.css";
 import { logoutUser } from "../../actions/auth.js";
-export const NavComponent = (props) => {
-  const { isAdmin, loggedIn, name, dataLoaded } = props;
-
+export const NavComponent = ({
+  isAdmin,
+  loggedIn,
+  name,
+  dataLoaded,
+  history,
+  logoutUser,
+}) => {
   const renderLogInOut = () => {
     let label = loggedIn ? "Log Out" : "Log In";
 
@@ -18,9 +23,9 @@ export const NavComponent = (props) => {
 
   const handleLogInOut = () => {
     if (loggedIn) {
-      props.logoutUser();
+      logoutUser();
     }
-    props.history.push("/");
+    history.push("/");
   };
 
   const renderAdmin = () => {
@@ -35,19 +40,19 @@ export const NavComponent = (props) => {
   };
 
   const handleAdmin = () => {
-    props.history.push("/dashboard");
+    history.push("/dashboard");
   };
 
   const handleHome = () => {
-    props.history.push("/home");
+    history.push("/home");
   };
 
   const handleProducts = () => {
-    props.history.push("/products");
+    history.push("/products");
   };
 
   const handleCart = () => {
-    props.history.push("/cart");
+    history.push("/cart");
   };
   return (
     <div className="header">
@@ -77,12 +82,12 @@ export const NavComponent = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { auth, user } = state;
   return {
     isAdmin: user.isAdmin,
-    loggedIn: admin.loggedIn,
+    loggedIn: auth.loggedIn,
     name: user.firstName,
-    dataLoaded: admin.dataLoaded,
+    dataLoaded: auth.dataLoaded,
   };
 };
 
