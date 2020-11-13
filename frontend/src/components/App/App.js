@@ -4,12 +4,13 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
 import { setDataLoaded } from "../../actions/index";
-import { getAllProducts } from "../../api/getAllProducts";
+import { setAllProducts } from "../../api/getAllProducts";
 
 // rfcredux
 function App(props) {
+  const { allProducts } = props;
   useEffect(() => {
-    props.getAllProducts();
+    // props.setAllProducts();
   }, []);
 
   const renderView = () => {
@@ -32,14 +33,15 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  const { auth, user } = state;
+  const { auth, products } = state;
   return {
     dataLoaded: auth.dataLoaded,
+    allProducts: products.allProducts,
   };
 };
 
 const mapDispatchToProps = {
-  getAllProducts,
+  setAllProducts,
   setDataLoaded,
 };
 

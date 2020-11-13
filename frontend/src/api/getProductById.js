@@ -7,7 +7,7 @@ const getProductById = (id) => async (dispatch) => {
   return await axios
     .get(src)
     .then((response) => response.data)
-    .then((data) => dispatch(getProduct(data)))
+    //.then((data) => dispatch(getProduct(data)))
     .catch((error) => dispatch(fetchError(error)));
 };
 
