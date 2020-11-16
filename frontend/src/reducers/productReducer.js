@@ -25,24 +25,17 @@ const productReducer = (state = initialState, action) => {
       };
 
     case DELETE_PRODUCT_BY_ID:
-      console.log("pr", payload);
-      let found = false;
+      let p;
       let index;
-      while (!found) {
-        let p;
-        for (p in state.allProducts) {
-          if (p.id === payload) {
-            index = p;
-            found = !found;
-          }
-          index++;
-        }
+      for (p in state.allProducts) {
+        if (state.allProducts[p].id === parseInt(payload)) index = p;
       }
-      console.log("reducer", index, payload);
-
       return {
         ...state,
-        allProducts: state.allProducts.splice(index, 1),
+        allProducts: [
+          ...state.allProducts.slice(0, index),
+          ...state.allProducts.slice(index + 1),
+        ],
       };
     default:
       return state;

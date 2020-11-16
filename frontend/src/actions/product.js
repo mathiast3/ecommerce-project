@@ -21,7 +21,6 @@ export const editProduct = (data) => {
 };
 
 export const deleteProduct = (id) => {
-  console.log("ac", id);
   return {
     type: DELETE_PRODUCT_BY_ID,
     payload: id,

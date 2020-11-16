@@ -4,10 +4,11 @@ import BootstrapTable from "react-bootstrap-table-next";
 import { Button } from "react-bootstrap";
 import "./Inventory.css";
 import ModalPopup from "../Modal/Modal";
-import deleteProductById from "../../api/deleteProductById";
 import { fetchError, fetchSuccess, deleteProduct } from "../../actions/product";
 import { setAllProducts, getAllProducts } from "../../api/getAllProducts";
 import axios from "axios";
+import { URI_DEL } from "../../constants/index";
+
 export const Inventory = ({
   isAdmin,
   allProducts,
@@ -17,77 +18,26 @@ export const Inventory = ({
   getAllProducts,
   deleteProduct,
 }) => {
-  const [update, setUpdate] = useState(false);
   const [show, setShow] = useState(false);
   const [itemDelete, setItemDelete] = useState(0);
   const [itemEdit, setItemEdit] = useState(0);
-  const [prod, setProd] = useState([]);
-
-  // useEffect(() => {
-  //   setAllProducts()
-  //     .then((result) => setProd(result))
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    // console.log(itemDelete, prod);
     if (itemDelete !== 0) {
-      deleteProductById(itemDelete);
+      deleteProductById();
       deleteProduct(itemDelete);
-      console.log("called deleteID");
-      //getAllProducts();
-      //setUpdate(true);
-      // setAllProducts()
-      //   .then((result) => {
-      //     setProds(result);
-      //   })
-      //   .catch((err) => console.log(err));
     }
-    // setAllProducts()
-    //   .then((result) => setProd(result))
-    //   .catch((err) => console.log(err));
   }, [itemDelete]);
 
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
-
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, [update]);
-
-  // const getAllProducts = () => {
-  //   try {
-  //     axios
-  //       .get("http://localhost:8080/api/products")
-  //       .then((result) => result.data)
-  //       .then((data) => {
-  //         setProd(data);
-  //         // setUpdate(true);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   } catch (err) {}
-  // };
-  // useEffect(() => {
-  //   if (update) {
-  //     setAllProducts()
-  //       .then((result) => setProd(result))
-  //       .catch((err) => console.log(err));
-  //     setUpdate(false);
-  //   }
-  // }, [update, allProducts]);
-  // }, []);
-
-  // useEffect(() => {
-  //   setAllProducts();
-  //   // .then((result) => {
-  //   //   setProds(result);
-  //   //   fetchSuccess();
-  //   // })
-  //   // .catch((err) => fetchError(err));
-  // }, []);
+  const deleteProductById = () => {
+    const src = `${URI_DEL}/product/${itemDelete}`;
+    return axios
+      .delete(src, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      })
+      .then((response) => response.data)
+      .catch((error) => console.log(error));
+  };
 
   // to do: on submit, sends to backend
   const renderAddProduct = () => {
