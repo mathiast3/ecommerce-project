@@ -1,4 +1,8 @@
-import { SET_PRODUCTS, FETCH_PRODUCTS_ERROR } from "../actions/types";
+import {
+  SET_PRODUCTS,
+  FETCH_PRODUCTS_ERROR,
+  DELETE_PRODUCT_BY_ID,
+} from "../actions/types";
 
 const initialState = {
   allProducts: [],
@@ -20,6 +24,26 @@ const productReducer = (state = initialState, action) => {
         error: payload,
       };
 
+    case DELETE_PRODUCT_BY_ID:
+      console.log("pr", payload);
+      let found = false;
+      let index;
+      while (!found) {
+        let p;
+        for (p in state.allProducts) {
+          if (p.id === payload) {
+            index = p;
+            found = !found;
+          }
+          index++;
+        }
+      }
+      console.log("reducer", index, payload);
+
+      return {
+        ...state,
+        allProducts: state.allProducts.splice(index, 1),
+      };
     default:
       return state;
   }

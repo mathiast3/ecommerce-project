@@ -5,9 +5,9 @@ import { Button } from "react-bootstrap";
 import "./Inventory.css";
 import ModalPopup from "../Modal/Modal";
 import deleteProductById from "../../api/deleteProductById";
-import { fetchError, fetchSuccess } from "../../actions/product";
+import { fetchError, fetchSuccess, deleteProduct } from "../../actions/product";
 import { setAllProducts, getAllProducts } from "../../api/getAllProducts";
-
+import axios from "axios";
 export const Inventory = ({
   isAdmin,
   allProducts,
@@ -15,6 +15,7 @@ export const Inventory = ({
   fetchError,
   setAllProducts,
   getAllProducts,
+  deleteProduct,
 }) => {
   const [update, setUpdate] = useState(false);
   const [show, setShow] = useState(false);
@@ -31,22 +32,44 @@ export const Inventory = ({
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    console.log(itemDelete, prod);
+    // console.log(itemDelete, prod);
     if (itemDelete !== 0) {
       deleteProductById(itemDelete);
-
-      setUpdate(true);
+      deleteProduct(itemDelete);
+      console.log("called deleteID");
+      //getAllProducts();
+      //setUpdate(true);
       // setAllProducts()
       //   .then((result) => {
       //     setProds(result);
       //   })
       //   .catch((err) => console.log(err));
     }
-    setAllProducts()
-      .then((result) => setProd(result))
-      .catch((err) => console.log(err));
-  }, []);
+    // setAllProducts()
+    //   .then((result) => setProd(result))
+    //   .catch((err) => console.log(err));
+  }, [itemDelete]);
 
+  // useEffect(() => {
+  //   getAllProducts();
+  // }, []);
+
+  // useEffect(() => {
+  //   getAllProducts();
+  // }, [update]);
+
+  // const getAllProducts = () => {
+  //   try {
+  //     axios
+  //       .get("http://localhost:8080/api/products")
+  //       .then((result) => result.data)
+  //       .then((data) => {
+  //         setProd(data);
+  //         // setUpdate(true);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   } catch (err) {}
+  // };
   // useEffect(() => {
   //   if (update) {
   //     setAllProducts()
@@ -198,7 +221,7 @@ export const Inventory = ({
     return (
       <BootstrapTable
         keyField="id"
-        data={prod}
+        data={allProducts}
         columns={isAdmin ? adminColumns : columns}
         defaultSorted={defaultSorted}
         rowEvents={rowEvents}
@@ -232,6 +255,7 @@ const mapDispatchToProps = {
   fetchError,
   setAllProducts,
   getAllProducts,
+  deleteProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

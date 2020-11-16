@@ -10,7 +10,7 @@ import { setAllProducts } from "../../api/getAllProducts";
 function App(props) {
   const { allProducts } = props;
   useEffect(() => {
-    // props.setAllProducts();
+    props.setAllProducts();
   }, []);
 
   const renderView = () => {
