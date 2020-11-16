@@ -3,8 +3,13 @@ import { useState, useEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button } from "react-bootstrap";
 import "./Inventory.css";
-import ModalPopup from "../Modal/Modal";
-import { fetchError, fetchSuccess, deleteProduct } from "../../actions/product";
+import { Link, useHistory } from "react-router-dom";
+import {
+  fetchError,
+  fetchSuccess,
+  deleteProduct,
+  setProductEditId,
+} from "../../actions/product";
 import { setAllProducts, getAllProducts } from "../../api/getAllProducts";
 import axios from "axios";
 import { URI_DEL } from "../../constants/index";
@@ -17,10 +22,11 @@ export const Inventory = ({
   setAllProducts,
   getAllProducts,
   deleteProduct,
+  setProductEditId,
 }) => {
   const [show, setShow] = useState(false);
   const [itemDelete, setItemDelete] = useState(0);
-  const [itemEdit, setItemEdit] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     if (itemDelete !== 0) {
@@ -39,21 +45,19 @@ export const Inventory = ({
       .catch((error) => console.log(error));
   };
 
-  // to do: on submit, sends to backend
   const renderAddProduct = () => {
     return (
       <>
-        <Button size="sm" onClick={() => setShow(true)}>
-          Add Product
-        </Button>
-        <ModalPopup show={show} setShow={setShow} />{" "}
+        <Link to="/addproduct">
+          <Button size="sm">Add Product</Button>
+        </Link>
       </>
     );
   };
 
-  // maybe trigger a modal?
   const handleClickEdit = (e) => {
-    setItemEdit(e.target.value);
+    setProductEditId(e.target.value);
+    history.push("/editproduct");
   };
 
   const handleClickDelete = (e) => {
@@ -100,9 +104,12 @@ export const Inventory = ({
   const optionsFormatter = (cell, row) => {
     return (
       <span>
-        <Button sm="true" value={row.id} onClick={handleClickEdit}>
-          Edit
-        </Button>{" "}
+        <>
+          {" "}
+          <Button sm="true" value={row.id} onClick={handleClickEdit}>
+            Edit
+          </Button>
+        </>
         <Button sm="true" value={row.id} onClick={handleClickDelete}>
           Delete
         </Button>
@@ -206,6 +213,7 @@ const mapDispatchToProps = {
   setAllProducts,
   getAllProducts,
   deleteProduct,
+  setProductEditId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

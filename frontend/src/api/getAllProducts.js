@@ -22,6 +22,10 @@ export const getAllProducts = () => {
     .catch((error) => console.log(error));
 };
 
+/**
+ * Note! Dummy data is used when connectivity to the database and backend
+ * server is not guaranteed
+ */
 export const setAllProducts = () => async (dispatch) => {
   let data = [
     {

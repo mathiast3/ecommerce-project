@@ -52,11 +52,12 @@ const authReducer = (state = initialState, action) => {
       };
 
     case LOG_OUT:
-      return {
-        ...state,
-        loggedIn: false,
-        registered: false,
-      };
+      // return {
+      //   ...state,
+      //   loggedIn: false,
+      //   registered: false,
+      // };
+      return initialState;
 
     // DELETE_USER_BY_ID, UPDATE_USER, ADD_USER?
     // ADD_PRODUCT, UPDATE/DELETE PRODUCT BY ID?

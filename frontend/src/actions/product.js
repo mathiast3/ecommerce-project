@@ -3,6 +3,7 @@ import {
   FETCH_PRODUCT_ERROR,
   FETCH_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_BY_ID,
+  SET_PRODUCT_EDIT_ID,
   DELETE_PRODUCT_BY_ID,
 } from "./types";
 
@@ -17,6 +18,13 @@ export const editProduct = (data) => {
   return {
     type: UPDATE_PRODUCT_BY_ID,
     payload: data,
+  };
+};
+
+export const setProductEditId = (id) => {
+  return {
+    type: SET_PRODUCT_EDIT_ID,
+    payload: id,
   };
 };
 

@@ -2,15 +2,23 @@ import {
   SET_PRODUCTS,
   FETCH_PRODUCTS_ERROR,
   DELETE_PRODUCT_BY_ID,
+  UPDATE_PRODUCT_BY_ID,
+  SET_PRODUCT_EDIT_ID,
+  ADD_PRODUCT,
+  LOG_OUT,
 } from "../actions/types";
 
 const initialState = {
   allProducts: [],
+  productEditId: -1,
+  productIndex: -1,
   error: {},
 };
 
 const productReducer = (state = initialState, action) => {
   const { type, payload } = action;
+  let p, index;
+
   switch (type) {
     case SET_PRODUCTS:
       return {
@@ -24,9 +32,13 @@ const productReducer = (state = initialState, action) => {
         error: payload,
       };
 
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        allProducts: state.allProducts.concat(payload),
+      };
+
     case DELETE_PRODUCT_BY_ID:
-      let p;
-      let index;
       for (p in state.allProducts) {
         if (state.allProducts[p].id === parseInt(payload)) index = p;
       }
@@ -37,6 +49,32 @@ const productReducer = (state = initialState, action) => {
           ...state.allProducts.slice(index + 1),
         ],
       };
+
+    case SET_PRODUCT_EDIT_ID:
+      return {
+        ...state,
+        productEditId: payload,
+      };
+
+    case UPDATE_PRODUCT_BY_ID:
+      return {
+        ...state,
+        allProducts: state.allProducts.map((product, i) =>
+          i === parseInt(payload.index)
+            ? {
+                ...product,
+                productName: payload.productName,
+                image: payload.image,
+                productCategory: payload.productCategory,
+                productCondition: payload.productCondition,
+                price: payload.price,
+              }
+            : product
+        ),
+      };
+
+    case LOG_OUT:
+      return initialState;
     default:
       return state;
   }
