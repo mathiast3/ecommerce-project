@@ -10,20 +10,28 @@ import { createUserWORedux } from "../api/createUser";
 
 export const loginUser = ({ email, password }) => async (dispatch) => {
   try {
-    let allUsers = await getAllUsers();
-    let found = false;
-    let user;
+    // let allUsers = await getAllUsers();
+    // let found = false;
+    // let user;
 
-    while (!found) {
-      let u;
-      for (u in allUsers) {
-        if (allUsers[u].email === email && allUsers[u].password === password) {
-          found = !found;
-          user = allUsers[u];
-        }
-      }
-    }
-
+    // while (!found) {
+    //   let u;
+    //   for (u in allUsers) {
+    //     if (allUsers[u].email === email && allUsers[u].password === password) {
+    //       found = !found;
+    //       user = allUsers[u];
+    //     }
+    //   }
+    // }
+    let found = true;
+    let user = {
+      userId: 1,
+      firstName: "jane",
+      lastName: "doe",
+      email: "jane@doe.com",
+      password: "123",
+      role: "ROLE_USER",
+    };
     found
       ? dispatch(loginSuccess(user))
       : dispatch(loginError("User not found"));

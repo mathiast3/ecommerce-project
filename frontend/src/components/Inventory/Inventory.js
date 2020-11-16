@@ -24,7 +24,7 @@ export const Inventory = ({
 
   useEffect(() => {
     if (itemDelete !== 0) {
-      deleteProductById();
+      // deleteProductById();
       deleteProduct(itemDelete);
     }
   }, [itemDelete]);
