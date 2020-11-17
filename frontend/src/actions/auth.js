@@ -7,31 +7,30 @@ import {
 } from "./types";
 import { getAllUsers } from "../api/getAllUsers";
 import { createUserWORedux } from "../api/createUser";
+import { LOGIN_DATA, USERS_DATA } from "../constants/sampleData";
 
 export const loginUser = ({ email, password }) => async (dispatch) => {
   try {
-    // let allUsers = await getAllUsers();
-    // let found = false;
-    // let user;
+    // API
+    //let allUsers = await getAllUsers();
+    let found = false;
+    let user;
 
-    // while (!found) {
-    //   let u;
-    //   for (u in allUsers) {
-    //     if (allUsers[u].email === email && allUsers[u].password === password) {
-    //       found = !found;
-    //       user = allUsers[u];
-    //     }
-    //   }
-    // }
+    while (!found) {
+      let u;
+      for (u in allUsers) {
+        if (allUsers[u].email === email && allUsers[u].password === password) {
+          found = !found;
+          user = allUsers[u];
+        }
+      }
+    }
+
+    // without API + backend server connectivity
+    let allUsers = USERS_DATA;
     let found = true;
-    let user = {
-      userId: 1,
-      firstName: "jane",
-      lastName: "doe",
-      email: "jane@doe.com",
-      password: "123",
-      role: "ROLE_USER",
-    };
+    user = LOGIN_DATA;
+
     found
       ? dispatch(loginSuccess(user))
       : dispatch(loginError("User not found"));

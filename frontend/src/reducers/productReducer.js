@@ -11,7 +11,7 @@ import {
 const initialState = {
   allProducts: [],
   productEditId: -1,
-  productIndex: -1,
+  // productIndex: -1,
   error: {},
 };
 
@@ -74,7 +74,11 @@ const productReducer = (state = initialState, action) => {
       };
 
     case LOG_OUT:
-      return initialState;
+      return {
+        ...state,
+        productEditId: -1,
+        error: {},
+      };
     default:
       return state;
   }

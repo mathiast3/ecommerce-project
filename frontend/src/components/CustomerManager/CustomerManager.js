@@ -1,21 +1,15 @@
 import { connect } from "react-redux";
-import { Form, FormControl, Button, Table } from "react-bootstrap";
+import { Form, FormControl, Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
-import { useState, useEffect } from "react";
 import { getAllUsers } from "../../api/getAllUsers";
 import { fetchError, fetchSuccess } from "../../actions/users";
 
-export const CustomerManager = ({ fetchError, fetchSuccess }) => {
-  const [customers, setCustomers] = useState([]);
-  useEffect(() => {
-    getAllUsers()
-      .then((result) => {
-        setCustomers(result);
-        fetchSuccess();
-      })
-      .catch((err) => fetchError(err));
-  }, []);
-
+export const CustomerManager = ({
+  fetchError,
+  fetchSuccess,
+  getAllUsers,
+  allUsers,
+}) => {
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
     let up = String.fromCharCode(9652);
@@ -38,16 +32,6 @@ export const CustomerManager = ({ fetchError, fetchSuccess }) => {
         </span>
       );
     }
-  };
-
-  // go to addproduct page? or an edit product page?
-  // delete call delete()
-  const optionsFormatter = (cell, row) => {
-    return (
-      <span>
-        <Button sm="true">Edit</Button> <Button sm="true">Delete</Button>
-      </span>
-    );
   };
 
   const renderTable = () => {
@@ -85,20 +69,11 @@ export const CustomerManager = ({ fetchError, fetchSuccess }) => {
       },
     ];
 
-    // admin has additional functionality: update, delete
-    const adminColumns = columns.concat([
-      {
-        dataField: "",
-        text: "Options",
-        formatter: (row, cell) => optionsFormatter(row, cell),
-      },
-    ]);
-
     return (
       <BootstrapTable
         keyField="id"
-        data={customers}
-        columns={adminColumns}
+        data={allUsers}
+        columns={columns}
         striped
         hover
         borderless
@@ -126,12 +101,12 @@ export const CustomerManager = ({ fetchError, fetchSuccess }) => {
 };
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
+  const { customers } = state;
   return {
-    //allCustomers: admin.customers,
+    allUsers: customers.allUsers,
   };
 };
 
-const mapDispatchToProps = { fetchError, fetchSuccess };
+const mapDispatchToProps = { fetchError, fetchSuccess, getAllUsers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerManager);

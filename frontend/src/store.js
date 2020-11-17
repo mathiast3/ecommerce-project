@@ -3,6 +3,7 @@ import cartReducer from "./reducers/cartReducer";
 import userReducer from "./reducers/userReducer";
 import authReducer from "./reducers/authReducer";
 import productReducer from "./reducers/productReducer";
+import customersReducer from "./reducers/customersReducer";
 
 // if nesting reducers, call combineReducers
 
@@ -18,6 +19,7 @@ const store = configureStore({
     cart: cartReducer,
     user: userReducer,
     products: productReducer,
+    customers: customersReducer,
   },
 });
 

@@ -1,8 +1,20 @@
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { logoutUser } from "../../actions/auth.js";
+import { useEffect } from "react";
+import { getAllUsers } from "../../api/getAllUsers";
 
-export const AdminDashboard = ({ name, logoutUser }) => {
+export const AdminDashboard = ({ name, logoutUser, getAllUsers }) => {
+  useEffect(() => {
+    getAllUsers();
+    // getAllUsers()
+    //   .then((result) => {
+    //     setCustomers(result);
+    //     fetchSuccess();
+    //   })
+    //   .catch((err) => fetchError(err));
+  }, []);
+
   const handleLogout = () => {
     logoutUser();
   };
@@ -42,7 +54,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { logoutUser };
+const mapDispatchToProps = { logoutUser, getAllUsers };
 
 export default connect(
   mapStateToProps,
