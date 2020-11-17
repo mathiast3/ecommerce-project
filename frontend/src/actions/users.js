@@ -1,5 +1,8 @@
 import { SET_USERS, FETCH_USERS_ERROR, FETCH_USERS_SUCCESS } from "./types";
 
+/**
+ * action creators for user management dashboard
+ */
 export const setUsers = (data) => {
   return {
     type: SET_USERS,

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { addUser, fetchError } from "../actions/user";
-import { URI_ADD } from "../constants/index";
+import { URI_ADD } from "../constants/uriRoutes";
 
 export const createUser = (data) => async (dispatch) => {
   const src = `${URI_ADD}/user`;

@@ -41,28 +41,7 @@ const Login = ({ history, loginUser, loading, error, loggedIn, isAdmin }) => {
       [name]: value,
     }));
   };
-  // let history = useHistory();
-  // const initialValues = {
-  //   email: "",
-  //   password: "",
-  // };
 
-  // // handleSubmit was in here...
-  // const { register, formState, errors, reset } = useForm({
-  //   defaultValues: { ...initialValues },
-  //   mode: "onChange",
-  // });
-
-  // // const onSubmit = (data) => {
-  // //   console.log(data);
-  // //   //loginuser function from action creator
-  // //   // loginUser(data).then((res) => {
-  // //   //   if (res.status === 200) {
-  // //   reset(initialValues);
-  // //   history.push("/");
-  // //   //   }
-  // //   // });
-  // // };
   // const [validated, setValidated] = useState(false);
   // const handleSubmit = (event) => {
   //   const form = event.currentTarget;

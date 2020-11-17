@@ -1,5 +1,8 @@
 import { ADD_USER, FETCH_USER_ERROR, FETCH_USER_SUCCESS } from "./types";
 
+/**
+ * action creators for an individual user
+ */
 export const addUser = (data) => {
   return {
     type: ADD_USER,

@@ -1,5 +1,8 @@
 import { ADD_TO_CART, DELETE_FROM_CART, CLEAR_CART } from "./types";
 
+/**
+ * action creators for an individual cart
+ */
 export const addToCart = (product) => {
   return {
     type: ADD_TO_CART,

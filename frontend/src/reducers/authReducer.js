@@ -11,20 +11,8 @@ const initialState = {
   loggedIn: false,
   dataLoaded: false,
   registered: false,
-  // isAdmin: true,
 };
 
-/*
-  products: [
-    {
-        "productName": "",
-        "productCategory": "",
-        "productCondition": "",
-        imageUrl": "",
-        "price": 1.23
-    }
-  ]
-*/
 const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -33,11 +21,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         dataLoaded: payload,
       };
-    // case SET_IS_ADMIN:
-    //   return {
-    //     ...state,
-    //     isAdmin: action.payload,
-    //   };
+
     case REGISTER_SUCCESS:
       return {
         ...state,
@@ -52,15 +36,7 @@ const authReducer = (state = initialState, action) => {
       };
 
     case LOG_OUT:
-      // return {
-      //   ...state,
-      //   loggedIn: false,
-      //   registered: false,
-      // };
       return initialState;
-
-    // DELETE_USER_BY_ID, UPDATE_USER, ADD_USER?
-    // ADD_PRODUCT, UPDATE/DELETE PRODUCT BY ID?
 
     default:
       return state;

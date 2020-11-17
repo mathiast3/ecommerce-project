@@ -7,6 +7,9 @@ import {
   DELETE_PRODUCT_BY_ID,
 } from "./types";
 
+/**
+ * action creators for an individual product
+ */
 export const addProduct = (data) => {
   return {
     type: ADD_PRODUCT,

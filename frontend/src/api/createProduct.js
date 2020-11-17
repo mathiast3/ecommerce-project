@@ -1,6 +1,6 @@
 import axios from "axios";
 import { addProduct, fetchError } from "../actions/index";
-import { URI_ADD } from "../constants/index";
+import { URI_ADD } from "../constants/uriRoutes";
 
 const createProduct = (data) => async (dispatch) => {
   const src = `${URI_ADD}/product`;

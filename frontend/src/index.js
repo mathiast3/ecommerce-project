@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -11,13 +10,8 @@ import createRoutes from "./routes";
 
 const routes = createRoutes();
 
-// <App />
 ReactDOM.render(
-  <Provider store={store}>
-    {/* <React.StrictMode> */}
-    {routes}
-    {/* </React.StrictMode> */}
-  </Provider>,
+  <Provider store={store}>{routes}</Provider>,
 
   document.getElementById("root")
 );

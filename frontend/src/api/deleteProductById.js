@@ -1,6 +1,6 @@
 import axios from "axios";
 import { deleteProduct, fetchError } from "../actions/product";
-import { URI_DEL } from "../constants/index";
+import { URI_DEL } from "../constants/uriRoutes";
 
 const deleteProductById = ({ id }) => {
   //=> async (dispatch) => {

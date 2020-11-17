@@ -12,7 +12,7 @@ import {
 } from "../../actions/product";
 import { setAllProducts, getAllProducts } from "../../api/getAllProducts";
 import axios from "axios";
-import { URI_DEL } from "../../constants/index";
+import { URI_DEL } from "../../constants/uriRoutes";
 
 export const Inventory = ({
   isAdmin,

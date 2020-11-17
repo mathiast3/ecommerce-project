@@ -1,5 +1,5 @@
 import axios from "axios";
-import { URI } from "../constants/index";
+import { URI } from "../constants/uriRoutes";
 import { setProducts, fetchError, fetchSuccess } from "../actions/products";
 import { PRODUCTS_DATA } from "../constants/sampleData";
 // export const setAllProducts = () => async (dispatch) => {

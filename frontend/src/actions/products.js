@@ -4,6 +4,9 @@ import {
   SET_PRODUCTS,
 } from "./types";
 
+/**
+ * action creators for product management dashboard
+ */
 export const setProducts = (data) => {
   return {
     type: SET_PRODUCTS,

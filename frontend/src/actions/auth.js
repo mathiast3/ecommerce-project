@@ -13,6 +13,9 @@ import {
   LOGIN_REGULAR_USER,
 } from "../constants/sampleData";
 
+/**
+ * action creators for an logging in/out and minimum authentication
+ */
 export const loginUser = ({ email, password }) => async (dispatch) => {
   try {
     // API

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setUsers, fetchError, fetchSuccess } from "../actions/users";
-import { URI } from "../constants/index";
+import { URI } from "../constants/uriRoutes";
 import { USERS_DATA } from "../constants/sampleData";
 
 export const setAllUsers = () => async (dispatch) => {

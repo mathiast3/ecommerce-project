@@ -1,6 +1,6 @@
 import axios from "axios";
 import { deleteUser, fetchError } from "../actions/index";
-import { URI_DEL } from "../constants/index";
+import { URI_DEL } from "../constants/uriRoutes";
 
 const deleteUserById = (id) => async (dispatch) => {
   const src = `${URI_DEL}/user/${id}`;

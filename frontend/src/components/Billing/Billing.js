@@ -24,14 +24,9 @@ const Billing = ({ registerUser, loading, user, error }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    //registerUser function from action creator
-    // registerUser(data).then((res) => {
-    //   if (res.status === 200) {
+    // console.log(data);
     reset(initialValues);
     history.push("/");
-    //   }
-    // });
   };
 
   return (

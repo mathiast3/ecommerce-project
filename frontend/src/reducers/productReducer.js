@@ -8,6 +8,7 @@ import {
   LOG_OUT,
 } from "../actions/types";
 
+// future work: set product index for any edit/delete action, for easy state manipulation
 const initialState = {
   allProducts: [],
   productEditId: -1,
