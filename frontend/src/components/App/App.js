@@ -1,58 +1,48 @@
 import "./App.css";
 import Nav from "../Nav/Nav";
 import { useEffect } from "react";
-import getAllUsers from "../../api/getAllUsers";
-import getUserById from "../../api/getUserById";
-import deleteUserById from "../../api/deleteUserById";
-import getAllProducts from "../../api/getAllProducts";
 import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
-import { setDataLoaded } from "../../actions/index";
+// import { setDataLoaded } from "../../actions/index";
+import { setAllProducts } from "../../api/getAllProducts";
+
 // rfcredux
 function App(props) {
+  const { allProducts } = props;
   useEffect(() => {
-    props.getAllUsers();
-    props.getUserById(1);
-    props.getAllProducts();
-    props.setDataLoaded(true);
+    props.setAllProducts();
   }, []);
 
   const renderView = () => {
-    if (!props.dataLoaded) return <Loading />;
-    else return null;
+    // if (!props.dataLoaded) return <Loading />;
+    // else return null;
   };
   return (
-    <div style={{ marginBottom: '70px' }}>
+    // <div style={{ marginBottom: '70px' }}>
+    <div className="con">
       <Nav />
-      {renderView()}
+      {/* {renderView()} */}
 
       <div className="App">
         <props.ChildComponent />
         {/* {props.dataLoaded ? <props.ChildComponent /> : <Loading />} */}
-        <footer className="fixed-bottom p-4 bg-dark text-white">
-          &copy; 2020 Company Inc .Privacy .Terms
-        </footer>
       </div>
+      <footer>&copy; 2020 Company Inc .Privacy .Terms</footer>
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { auth, products } = state;
   return {
-    customers: admin.customers,
-    products: admin.products,
-    userId: user.userId,
-    dataLoaded: admin.dataLoaded,
+    // dataLoaded: auth.dataLoaded,
+    allProducts: products.allProducts,
   };
 };
 
 const mapDispatchToProps = {
-  getAllUsers,
-  getUserById,
-  deleteUserById,
-  getAllProducts,
-  setDataLoaded,
+  setAllProducts,
+  // setDataLoaded,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

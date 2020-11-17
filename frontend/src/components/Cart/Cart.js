@@ -1,11 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Container, Jumbotron, Button, Row, Col, Table } from 'react-bootstrap';
-import { AiOutlineClose } from 'react-icons/ai';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Container, Jumbotron, Button, Row, Col, Table } from "react-bootstrap";
+import { AiOutlineClose } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
+import { clearCart, deleteFromCart } from "../../actions/cart";
 
-export const Cart = () => {
+export const Cart = ({ items, total, clearCart, deleteFromCart }) => {
   let history = useHistory();
+  const [itemDelete, setItemDelete] = useState(-1);
+
+  useEffect(() => {
+    if (itemDelete !== -1) {
+      console.log(itemDelete);
+      deleteFromCart(itemDelete);
+    }
+  }, [itemDelete]);
 
   return (
     <div>
@@ -17,23 +26,52 @@ export const Cart = () => {
       </Jumbotron>
 
       <Container>
-        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '20px 0'}}>
-          <Button variant="danger">Clear Cart</Button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "20px 0",
+          }}
+        >
+          <Button variant="danger" onClick={clearCart}>
+            Clear Cart
+          </Button>
 
-          <Button variant="success">Checkout</Button>
+          <Button variant="success" onClick={() => history.push("/billing")}>
+            Checkout
+          </Button>
         </div>
         <Table striped bordered hover>
           <thead>
             <tr>
               <th>Product</th>
-              <th>Unit Price</th>
-              <th>Quantity</th>
+              <th>Category</th>
+              <th>Condition</th>
               <th>Price</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {items.map((p, row) => {
+              return (
+                <tr key={row}>
+                  <td>{p.productName}</td>
+                  <td>{p.productCategory}</td>
+                  <td>{p.productCondition}</td>
+                  <td>{p.price}</td>
+                  <td>
+                    <Button
+                      sm="true"
+                      value={row.id}
+                      onClick={() => setItemDelete(row)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+            {/* <tr>
               <td>Sofa</td>
               <td>500</td>
               <td>1</td>
@@ -41,10 +79,10 @@ export const Cart = () => {
               <td>
                 <AiOutlineClose />
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </Table>
-        <Button onClick={() => history.push('/products')}>
+        <Button onClick={() => history.push("/products")}>
           Continue Shopping
         </Button>
       </Container>
@@ -52,8 +90,14 @@ export const Cart = () => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  const { cart } = state;
+  return {
+    items: cart.items,
+    total: cart.total,
+  };
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { clearCart, deleteFromCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

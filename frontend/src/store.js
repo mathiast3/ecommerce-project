@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./reducers/cartReducer";
 import userReducer from "./reducers/userReducer";
-import adminReducer from "./reducers/adminReducer";
-// import productReducer from "./reducers/productReducer";
+import authReducer from "./reducers/authReducer";
+import productReducer from "./reducers/productReducer";
+import customersReducer from "./reducers/customersReducer";
 
 // if nesting reducers, call combineReducers
 
@@ -14,10 +15,11 @@ import adminReducer from "./reducers/adminReducer";
  */
 const store = configureStore({
   reducer: {
-    admin: adminReducer,
+    auth: authReducer,
     cart: cartReducer,
     user: userReducer,
-    // product: productReducer,
+    products: productReducer,
+    customers: customersReducer,
   },
 });
 

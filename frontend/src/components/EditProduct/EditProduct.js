@@ -1,38 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { addProduct } from "../../actions/product";
+import { editProduct } from "../../actions/product";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const AddProduct = ({ addProduct }) => {
+export const EditProduct = ({ allProducts, productEditId, editProduct }) => {
   const history = useHistory();
 
-  const [product, setProduct] = useState({
+  const [data, setData] = useState({
     productName: "",
     image: "",
     productCategory: "",
     productCondition: "",
     price: 0,
+    index: -1,
   });
+
+  useEffect(() => {
+    initData();
+  }, []);
+
+  const initData = () => {
+    let p;
+    for (p in allProducts) {
+      if (allProducts[p].id === parseInt(productEditId)) break;
+    }
+    let curr = allProducts[p];
+    setData({
+      productName: curr.productName,
+      image: curr.image,
+      productCategory: curr.productCategory,
+      productCondition: curr.productCondition,
+      price: curr.price,
+      index: p,
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    addProduct({
-      productName: product.productName,
-      image: product.image,
-      productCategory: product.productCategory,
-      productCondition: product.productCondition,
-      price: product.price,
+    editProduct({
+      productName: data.productName,
+      image: data.image,
+      productCategory: data.productCategory,
+      productCondition: data.productCondition,
+      price: data.price,
+      index: data.index,
     });
 
-    history.push("/dashboard");
+    history.push("/products");
   };
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setProduct((p) => ({
+
+    setData((p) => ({
       ...p,
       [name]: value,
     }));
@@ -40,16 +63,15 @@ export const AddProduct = ({ addProduct }) => {
 
   return (
     <>
-      <h1>Add Product</h1>
+      <h1>Edit Product</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicImage">
           <Form.Label>Image</Form.Label>
           <Form.Control
             type="file"
             accept="image/*"
-            placeholder="Upload image"
             name="image"
-            value={product.image}
+            value={data.image}
             onChange={handleChange}
           />
         </Form.Group>
@@ -58,11 +80,9 @@ export const AddProduct = ({ addProduct }) => {
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Product Name"
             name="productName"
-            value={product.productName}
+            value={data.productName}
             onChange={handleChange}
-            required
           />
         </Form.Group>
         <Form.Row>
@@ -70,11 +90,9 @@ export const AddProduct = ({ addProduct }) => {
             <Form.Label>Category</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Product Category"
               name="productCategory"
-              value={product.productCategory}
+              value={data.productCategory}
               onChange={handleChange}
-              required
             />
           </Form.Group>
 
@@ -82,11 +100,9 @@ export const AddProduct = ({ addProduct }) => {
             <Form.Label>Condition</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Product Condition"
               name="productCondition"
-              value={product.productCondition}
+              value={data.productCondition}
               onChange={handleChange}
-              required
             />
           </Form.Group>
 
@@ -94,18 +110,20 @@ export const AddProduct = ({ addProduct }) => {
             <Form.Label>Price</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Product Price"
               name="price"
-              value={product.price}
+              value={data.price}
               onChange={handleChange}
-              required
             />
           </Form.Group>
         </Form.Row>
-        <Button variant="primary" type="submit" block>
+        <Button type="submit" block>
           Submit
         </Button>
       </Form>
+      <br />
+      <Link to="/products">
+        <Button block>Cancel</Button>
+      </Link>
     </>
   );
 };
@@ -113,9 +131,10 @@ export const AddProduct = ({ addProduct }) => {
 const mapStateToProps = (state) => {
   const { products } = state;
   return {
+    allProducts: products.allProducts,
     productEditId: products.productEditId,
   };
 };
-const mapDispatchToProps = { addProduct };
+const mapDispatchToProps = { editProduct };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProduct);

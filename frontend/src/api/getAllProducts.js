@@ -1,14 +1,32 @@
 import axios from "axios";
-import { getProducts, fetchError } from "../actions/index";
-import { URI } from "../constants/index";
+import { URI } from "../constants/uriRoutes";
+import { setProducts, fetchError, fetchSuccess } from "../actions/products";
+import { PRODUCTS_DATA } from "../constants/sampleData";
+// export const setAllProducts = () => async (dispatch) => {
+//   const src = `${URI}/products`;
+//   return await axios
+//     .get(src)
+//     .then((response) => response.data)
+//     .then((data) => {
+//       dispatch(setProducts(data));
+//       dispatch(fetchSuccess());
+//     })
+//     .catch((error) => dispatch(fetchError(error)));
+// };
 
-const getAllProducts = () => async (dispatch) => {
+export const getAllProducts = () => {
   const src = `${URI}/products`;
-  return await axios
+  return axios
     .get(src)
     .then((response) => response.data)
-    .then((data) => dispatch(getProducts(data)))
-    .catch((error) => dispatch(fetchError(error)));
+    .catch((error) => console.log(error));
 };
 
-export default getAllProducts;
+/**
+ * Note! Dummy data is used when connectivity to the database and backend
+ * server is not guaranteed
+ */
+export const setAllProducts = () => async (dispatch) => {
+  dispatch(setProducts(PRODUCTS_DATA));
+  return PRODUCTS_DATA;
+};

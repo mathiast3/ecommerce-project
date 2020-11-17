@@ -1,30 +1,68 @@
 import { connect } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button } from "react-bootstrap";
 import "./Inventory.css";
-import ModalPopup from "../Modal/Modal";
+import { Link, useHistory } from "react-router-dom";
+import {
+  fetchError,
+  fetchSuccess,
+  deleteProduct,
+  setProductEditId,
+} from "../../actions/product";
+import { setAllProducts, getAllProducts } from "../../api/getAllProducts";
+import axios from "axios";
+import { URI_DEL } from "../../constants/uriRoutes";
 
-export const Inventory = (props) => {
-  const { isAdmin } = props;
+export const Inventory = ({
+  isAdmin,
+  allProducts,
+  fetchSuccess,
+  fetchError,
+  setAllProducts,
+  getAllProducts,
+  deleteProduct,
+  setProductEditId,
+}) => {
   const [show, setShow] = useState(false);
+  const [itemDelete, setItemDelete] = useState(-1);
+  const history = useHistory();
 
-  // to do: on submit, sends to backend
+  useEffect(() => {
+    if (itemDelete !== -1) {
+      // deleteProductById();
+      deleteProduct(itemDelete);
+    }
+  }, [itemDelete]);
+
+  const deleteProductById = () => {
+    const src = `${URI_DEL}/product/${itemDelete}`;
+    return axios
+      .delete(src, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      })
+      .then((response) => response.data)
+      .catch((error) => console.log(error));
+  };
+
   const renderAddProduct = () => {
     return (
       <>
-        <Button size="sm" onClick={() => setShow(true)}>
-          Add Product
-        </Button>
-        <ModalPopup show={show} setShow={setShow} />{' '}
+        <Link to="/addproduct">
+          <Button size="sm">Add Product</Button>
+        </Link>
       </>
     );
   };
 
-  // maybe trigger a modal?
-  const handleClickEdit = () => {};
+  const handleClickEdit = (e) => {
+    setProductEditId(e.target.value);
+    history.push("/editproduct");
+  };
 
-  const handleClickDelete = () => {};
+  const handleClickDelete = (e) => {
+    setItemDelete(e.target.value);
+  };
 
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
@@ -44,7 +82,7 @@ export const Inventory = (props) => {
     else {
       return (
         <span>
-          &nbsp;&nbsp;<font color="black">{order === 'asc' ? up : down}</font>
+          &nbsp;&nbsp;<font color="black">{order === "asc" ? up : down}</font>
         </span>
       );
     }
@@ -62,13 +100,17 @@ export const Inventory = (props) => {
     );
   };
 
+  // passed into row: {id: 1, productName: "", category ...}
   const optionsFormatter = (cell, row) => {
     return (
       <span>
-        <Button sm="true" onClick={handleClickEdit}>
-          Edit
-        </Button>{" "}
-        <Button sm="true" onClick={handleClickDelete}>
+        <>
+          {" "}
+          <Button sm="true" value={row.id} onClick={handleClickEdit}>
+            Edit
+          </Button>
+        </>
+        <Button sm="true" value={row.id} onClick={handleClickDelete}>
           Delete
         </Button>
       </span>
@@ -76,8 +118,6 @@ export const Inventory = (props) => {
   };
 
   const renderTable = () => {
-    const products = props.allProducts;
-
     const columns = [
       {
         dataField: "productName",
@@ -103,8 +143,8 @@ export const Inventory = (props) => {
         sortCaret: (order, column) => sortStyling(order, column),
       },
       {
-        dataField: 'price',
-        text: 'Product Price',
+        dataField: "price",
+        text: "Product Price",
         sort: true,
         sortCaret: (order, column) => sortStyling(order, column),
         formatter: (row, cell) => priceFormatter(row, cell),
@@ -114,16 +154,16 @@ export const Inventory = (props) => {
     // admin has additional functionality: update, delete
     const adminColumns = columns.concat([
       {
-        dataField: '',
-        text: 'Options',
+        dataField: "",
+        text: "Options",
         formatter: (row, cell) => optionsFormatter(row, cell),
       },
     ]);
 
     const defaultSorted = [
       {
-        dataField: 'id',
-        order: 'asc',
+        dataField: "id",
+        order: "asc",
       },
     ];
     // const openProduct = (id) => {
@@ -131,14 +171,15 @@ export const Inventory = (props) => {
     // };
     const rowEvents = {
       onClick: (e, row) => {
-       // history.push(`/admin/product/${row.id}`);
+        setProductEditId(row.id);
+        history.push(`/products/${row.id}`);
       },
     };
 
     return (
       <BootstrapTable
         keyField="id"
-        data={products}
+        data={allProducts}
         columns={isAdmin ? adminColumns : columns}
         defaultSorted={defaultSorted}
         rowEvents={rowEvents}
@@ -153,6 +194,11 @@ export const Inventory = (props) => {
   return (
     <div>
       <h1>Product Inventory</h1>
+      <p>
+        {isAdmin
+          ? "Select an item to edit or delete a product"
+          : "Select a row to view the item in more detail"}
+      </p>
       {renderTable()}
       {isAdmin ? renderAddProduct() : null}
     </div>
@@ -160,13 +206,20 @@ export const Inventory = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { user, products } = state;
   return {
-    allProducts: admin.products,
+    allProducts: products.allProducts,
     isAdmin: user.isAdmin,
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  fetchSuccess,
+  fetchError,
+  setAllProducts,
+  getAllProducts,
+  deleteProduct,
+  setProductEditId,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

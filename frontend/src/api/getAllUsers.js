@@ -1,14 +1,29 @@
 import axios from "axios";
-import { getUsers, fetchError } from "../actions/index";
-import { URI } from "../constants/index";
+import { setUsers, fetchError, fetchSuccess } from "../actions/users";
+import { URI } from "../constants/uriRoutes";
+import { USERS_DATA } from "../constants/sampleData";
 
-const getAllUsers = () => async (dispatch) => {
+export const setAllUsers = () => async (dispatch) => {
   const src = `${URI}/allUsers`;
   return await axios
     .get(src)
     .then((response) => response.data)
-    .then((data) => dispatch(getUsers(data)))
+    .then((data) => {
+      dispatch(setUsers(data));
+      dispatch(fetchSuccess());
+    })
     .catch((error) => dispatch(fetchError(error)));
 };
 
-export default getAllUsers;
+// export const getAllUsers = () => {
+//   const src = `${URI}/allUsers`;
+//   return axios
+//     .get(src)
+//     .then((response) => response.data)
+//     .catch((error) => console.log(error));
+// };
+
+export const getAllUsers = () => async (dispatch) => {
+  dispatch(setUsers(USERS_DATA));
+  return USERS_DATA;
+};

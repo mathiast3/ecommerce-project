@@ -1,8 +1,15 @@
 import { connect } from "react-redux";
-import { Form, FormControl, Button, Table } from "react-bootstrap";
+import { Form, FormControl, Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
+import { getAllUsers } from "../../api/getAllUsers";
+import { fetchError, fetchSuccess } from "../../actions/users";
 
-export const CustomerManager = (props) => {
+export const CustomerManager = ({
+  fetchError,
+  fetchSuccess,
+  getAllUsers,
+  allUsers,
+}) => {
   // renders up and down arrows indicating sort direction
   const sortStyling = (order, column) => {
     let up = String.fromCharCode(9652);
@@ -27,18 +34,8 @@ export const CustomerManager = (props) => {
     }
   };
 
-  // go to addproduct page? or an edit product page?
-  // delete call delete()
-  const optionsFormatter = (cell, row) => {
-    return (
-      <span>
-        <Button sm="true">Edit</Button> <Button sm="true">Delete</Button>
-      </span>
-    );
-  };
-
   const renderTable = () => {
-    const products = props.allCustomers;
+    //const products = props.allCustomers;
     const columns = [
       {
         dataField: "userId",
@@ -72,20 +69,11 @@ export const CustomerManager = (props) => {
       },
     ];
 
-    // admin has additional functionality: update, delete
-    const adminColumns = columns.concat([
-      {
-        dataField: "",
-        text: "Options",
-        formatter: (row, cell) => optionsFormatter(row, cell),
-      },
-    ]);
-
     return (
       <BootstrapTable
         keyField="id"
-        data={products}
-        columns={adminColumns}
+        data={allUsers}
+        columns={columns}
         striped
         hover
         borderless
@@ -113,12 +101,12 @@ export const CustomerManager = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state;
+  const { customers } = state;
   return {
-    allCustomers: admin.customers,
+    allUsers: customers.allUsers,
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { fetchError, fetchSuccess, getAllUsers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerManager);

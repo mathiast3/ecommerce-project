@@ -1,29 +1,85 @@
-import { GET_PRODUCTS } from "../actions/types";
+import {
+  SET_PRODUCTS,
+  FETCH_PRODUCTS_ERROR,
+  DELETE_PRODUCT_BY_ID,
+  UPDATE_PRODUCT_BY_ID,
+  SET_PRODUCT_EDIT_ID,
+  ADD_PRODUCT,
+  LOG_OUT,
+} from "../actions/types";
 
+// future work: set product index for any edit/delete action, for easy state manipulation
 const initialState = {
-  all: [],
+  allProducts: [],
+  productEditId: -1,
+  // productIndex: -1,
+  error: {},
 };
 
-/*
-    {
-        "productName": "",
-        "productCategory": "",
-        "productCondition": "",
-        imageUrl": "",
-        "price": 1.23
-    }
-*/
 const productReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_PRODUCTS:
+  const { type, payload } = action;
+  let p, index;
+
+  switch (type) {
+    case SET_PRODUCTS:
       return {
         ...state,
-        all: action.payload,
+        allProducts: payload,
       };
 
-    // DELETE_USER_BY_ID, UPDATE_USER, ADD_USER?
-    // ADD_PRODUCT, UPDATE/DELETE PRODUCT BY ID?
+    case FETCH_PRODUCTS_ERROR:
+      return {
+        ...state,
+        error: payload,
+      };
 
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        allProducts: state.allProducts.concat(payload),
+      };
+
+    case DELETE_PRODUCT_BY_ID:
+      for (p in state.allProducts) {
+        if (state.allProducts[p].id === parseInt(payload)) index = p;
+      }
+      return {
+        ...state,
+        allProducts: [
+          ...state.allProducts.slice(0, index),
+          ...state.allProducts.slice(index + 1),
+        ],
+      };
+
+    case SET_PRODUCT_EDIT_ID:
+      return {
+        ...state,
+        productEditId: payload,
+      };
+
+    case UPDATE_PRODUCT_BY_ID:
+      return {
+        ...state,
+        allProducts: state.allProducts.map((product, i) =>
+          i === parseInt(payload.index)
+            ? {
+                ...product,
+                productName: payload.productName,
+                image: payload.image,
+                productCategory: payload.productCategory,
+                productCondition: payload.productCondition,
+                price: payload.price,
+              }
+            : product
+        ),
+      };
+
+    case LOG_OUT:
+      return {
+        ...state,
+        productEditId: -1,
+        error: {},
+      };
     default:
       return state;
   }

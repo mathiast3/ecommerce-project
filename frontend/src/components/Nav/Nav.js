@@ -1,11 +1,17 @@
 import { connect } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
-
-export const NavComponent = (props) => {
-  const { isAdmin, loggedIn, name, dataLoaded } = props;
-
-  // add more functionality here
+import "./Nav.css";
+import { logoutUser } from "../../actions/auth.js";
+export const NavComponent = ({
+  isAdmin,
+  loggedIn,
+  name,
+  dataLoaded,
+  history,
+  logoutUser,
+  items,
+}) => {
   const renderLogInOut = () => {
     let label = loggedIn ? "Log Out" : "Log In";
 
@@ -17,7 +23,10 @@ export const NavComponent = (props) => {
   };
 
   const handleLogInOut = () => {
-    props.history.push("/");
+    if (loggedIn) {
+      logoutUser();
+    }
+    history.push("/");
   };
 
   const renderAdmin = () => {
@@ -31,23 +40,34 @@ export const NavComponent = (props) => {
     );
   };
 
+  const renderCart = () => {
+    if (!loggedIn) {
+      return null;
+    }
+    return (
+      <div onClick={handleCart}>
+        <Nav.Link href="">Cart ({items.length})</Nav.Link>
+      </div>
+    );
+  };
+
   const handleAdmin = () => {
-    props.history.push("/dashboard");
+    history.push("/dashboard");
   };
 
   const handleHome = () => {
-    props.history.push("/home");
+    history.push("/home");
   };
 
   const handleProducts = () => {
-    props.history.push("/products");
+    history.push("/products");
   };
 
   const handleCart = () => {
-    props.history.push("/cart");
+    history.push("/cart");
   };
   return (
-    <>
+    <div className="header">
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>Furniture Hub</Navbar.Brand>
         <Nav className="mr-auto">
@@ -59,29 +79,30 @@ export const NavComponent = (props) => {
           </Nav.Link>
         </Nav>
         <Nav>
-          <Navbar.Text>Welcome, {dataLoaded ? name : "Guest"} </Navbar.Text>
-          <Nav.Link href="" onClick={handleCart}>
-            Cart
-          </Nav.Link>
+          <Navbar.Text>Welcome, {loggedIn ? name : "Guest"} </Navbar.Text>
+
+          {/* <Navbar.Text>Welcome, {dataLoaded ? name : "Guest"} </Navbar.Text> */}
+          {renderCart()}
           {renderLogInOut()}
           {renderAdmin()}
         </Nav>
       </Navbar>
-    </>
+    </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  const { admin, user } = state;
+  const { auth, user, cart } = state;
   return {
     isAdmin: user.isAdmin,
-    loggedIn: admin.loggedIn,
+    loggedIn: auth.loggedIn,
     name: user.firstName,
-    dataLoaded: admin.dataLoaded,
+    dataLoaded: auth.dataLoaded,
+    items: cart.items,
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { logoutUser };
 
 export default connect(
   mapStateToProps,

@@ -1,27 +1,49 @@
-export const FETCH_ERROR = "FETCH_ERROR";
-
 // API calls
+export const FETCH_PRODUCTS_ERROR = "FETCH_PRODUCTS_ERROR";
+export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
+
+export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCH_USER_ERROR = "FETCH_USER_ERROR";
+
+export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+export const FETCH_USERS_ERROR = "FETCH_USERS_ERROR";
+
+export const FETCH_PRODUCT_SUCCESS = "FETCH_PRODUCT_SUCCESS";
+export const FETCH_PRODUCT_ERROR = "FETCH_PRODUCT_ERROR";
+
+// USERS reducer actions
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const SET_USERS = "SET_USERS";
 export const ADD_USER = "ADD_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER_BY_ID = "DELETE_USER_BY_ID";
 
+// PRODUCTS reducer actions
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT = "GET_PRODUCT";
+export const SET_PRODUCTS = "SET_PRODUCTS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const UPDATE_PRODUCT_BY_ID = "UPDATE_PRODUCT_BY_ID";
+export const SET_PRODUCT_EDIT_ID = "SET_PRODUCT_EDIT_ID";
 export const DELETE_PRODUCT_BY_ID = "DELETE_PRODUCT_BY_ID";
 
-export const SET_DATA_LOADED = "SET_DATA_LOADED";
-
+// CART reducer actions
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
 
+// TRANSACTIONS
 export const ADD_TRANSACTION = "ADD_TRANSACTION";
 
+// AUTH reducer actions
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOG_OUT = "LOG_OUT";
+
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_ERROR = "REGISTER_ERROR";
+
+export const SET_DATA_LOADED = "SET_DATA_LOADED";
 
 export const SET_IS_ADMIN = "SET_IS_ADMIN";
