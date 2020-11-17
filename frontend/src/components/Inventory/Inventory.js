@@ -25,11 +25,11 @@ export const Inventory = ({
   setProductEditId,
 }) => {
   const [show, setShow] = useState(false);
-  const [itemDelete, setItemDelete] = useState(0);
+  const [itemDelete, setItemDelete] = useState(-1);
   const history = useHistory();
 
   useEffect(() => {
-    if (itemDelete !== 0) {
+    if (itemDelete !== -1) {
       // deleteProductById();
       deleteProduct(itemDelete);
     }
@@ -171,7 +171,8 @@ export const Inventory = ({
     // };
     const rowEvents = {
       onClick: (e, row) => {
-        // history.push(`/admin/product/${row.id}`);
+        setProductEditId(row.id);
+        history.push(`/products/${row.id}`);
       },
     };
 
@@ -193,6 +194,11 @@ export const Inventory = ({
   return (
     <div>
       <h1>Product Inventory</h1>
+      <p>
+        {isAdmin
+          ? "Select an item to edit or delete a product"
+          : "Select a row to view the item in more detail"}
+      </p>
       {renderTable()}
       {isAdmin ? renderAddProduct() : null}
     </div>

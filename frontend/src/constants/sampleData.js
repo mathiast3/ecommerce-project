@@ -3,13 +3,21 @@
  * API calls to the backend server and database
  */
 
-export const LOGIN_DATA = {
+export const LOGIN_ADMIN_USER = {
   userId: 2,
   firstName: "jane",
   lastName: "doe",
   email: "jane@doe.com",
   password: "123",
   role: "ROLE_USER",
+};
+
+export const LOGIN_REGULAR_USER = {
+  userId: 1,
+  firstName: "Alpha",
+  lastName: "Bet",
+  email: "alpha@bet.com",
+  role: "ROLE_REGULAR", // double check on this field
 };
 
 export const USERS_DATA = [

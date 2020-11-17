@@ -31,6 +31,7 @@ export const DELETE_PRODUCT_BY_ID = "DELETE_PRODUCT_BY_ID";
 // CART reducer actions
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
 
 // TRANSACTIONS
 export const ADD_TRANSACTION = "ADD_TRANSACTION";

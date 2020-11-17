@@ -1,7 +1,7 @@
 import axios from "axios";
 import { URI } from "../constants/index";
 import { setProducts, fetchError, fetchSuccess } from "../actions/products";
-import { PRODUCTS_DATA } from "../constants/dummyData";
+import { PRODUCTS_DATA } from "../constants/sampleData";
 // export const setAllProducts = () => async (dispatch) => {
 //   const src = `${URI}/products`;
 //   return await axios

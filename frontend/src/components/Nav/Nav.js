@@ -10,6 +10,7 @@ export const NavComponent = ({
   dataLoaded,
   history,
   logoutUser,
+  items,
 }) => {
   const renderLogInOut = () => {
     let label = loggedIn ? "Log Out" : "Log In";
@@ -36,6 +37,17 @@ export const NavComponent = ({
       <Nav.Link href="" onClick={handleAdmin}>
         Admin
       </Nav.Link>
+    );
+  };
+
+  const renderCart = () => {
+    if (!loggedIn) {
+      return null;
+    }
+    return (
+      <div onClick={handleCart}>
+        <Nav.Link href="">Cart ({items.length})</Nav.Link>
+      </div>
     );
   };
 
@@ -70,9 +82,7 @@ export const NavComponent = ({
           <Navbar.Text>Welcome, {loggedIn ? name : "Guest"} </Navbar.Text>
 
           {/* <Navbar.Text>Welcome, {dataLoaded ? name : "Guest"} </Navbar.Text> */}
-          <Nav.Link href="" onClick={handleCart}>
-            Cart
-          </Nav.Link>
+          {renderCart()}
           {renderLogInOut()}
           {renderAdmin()}
         </Nav>
@@ -82,12 +92,13 @@ export const NavComponent = ({
 };
 
 const mapStateToProps = (state) => {
-  const { auth, user } = state;
+  const { auth, user, cart } = state;
   return {
     isAdmin: user.isAdmin,
     loggedIn: auth.loggedIn,
     name: user.firstName,
     dataLoaded: auth.dataLoaded,
+    items: cart.items,
   };
 };
 
