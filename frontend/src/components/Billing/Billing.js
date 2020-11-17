@@ -169,7 +169,8 @@ const Billing = ({ registerUser, loading, user, error }) => {
           block
           variant="primary"
           type="submit"
-          disabled={!formState.isValid}
+          // disabled={!formState.isValid}
+          onClick={() => history.push("/confirmation")}
         >
           {loading ? <Spinner animation="border" variant="light" /> : "Pay"}
         </Button>

@@ -1,4 +1,9 @@
-import { ADD_TO_CART, DELETE_FROM_CART, CLEAR_CART } from "../actions/types";
+import {
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+  CLEAR_CART,
+  ADD_TRANSACTION,
+} from "../actions/types";
 
 const initialState = {
   items: [],
@@ -23,6 +28,9 @@ const cartReducer = (state = initialState, action) => {
         items: state.items.filter((item, index) => index !== parseInt(payload)),
         total: state.total - payload.price,
       };
+
+    case ADD_TRANSACTION:
+      return initialState;
 
     case CLEAR_CART:
       return initialState;
